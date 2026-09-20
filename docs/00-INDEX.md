@@ -23,10 +23,8 @@
 
 | # | קובץ | עונה על |
 |---|---|---|
-| 04 | [`04-CONTENT-LIBRARY.md`](04-CONTENT-LIBRARY.md) | כללי החילוץ והכלל שאוסר לגעת |
-| 24 | [`24-LIBRARY-MEASURED.md`](24-LIBRARY-MEASURED.md) | **הספרייה כפי שנמדדה** — 157 סעיפים, 23 קטגוריות |
+| 04 | [`04-CONTENT-LIBRARY.md`](04-CONTENT-LIBRARY.md) | הספרייה — סכמה והכלל שאוסר להעתיק |
 | 16 | [`16-GLOSSARY.md`](16-GLOSSARY.md) | מה אומר כל מונח מקצועי בעברית |
-| 22 | [`22-FIRE-GAP-ANALYSIS.md`](22-FIRE-GAP-ANALYSIS.md) | למה קטגוריית האש דלה |
 
 ## חזית
 
@@ -57,9 +55,9 @@
 | # | קובץ | עונה על |
 |---|---|---|
 | 12 | [`12-TESTING.md`](12-TESTING.md) | מה נבדק ואיך |
-| 13 | [`13-MIGRATION.md`](13-MIGRATION.md) | איך עוברים מהמערכת הישנה |
+| 13 | [`13-LIBRARY-BUILD.md`](13-LIBRARY-BUILD.md) | **איך בונים את הספרייה** מהקורפוס |
 | 14 | [`14-ROADMAP.md`](14-ROADMAP.md) | באיזה סדר בונים |
-| 15 | [`15-AUDIT-FINDINGS.md`](15-AUDIT-FINDINGS.md) | הבאגים שנמצאו — כל אחד הוא טסט |
+| 15 | [`15-DESIGN-REQUIREMENTS.md`](15-DESIGN-REQUIREMENTS.md) | 16 דרישות תכן קשיחות — כל אחת טסט |
 | 17 | [`17-WORKFLOW.md`](17-WORKFLOW.md) | ענפים, קומיטים, PR |
 | 18 | [`18-DECISIONS.md`](18-DECISIONS.md) | למה הוחלט מה שהוחלט |
 | 20 | [`20-OPEN-QUESTIONS.md`](20-OPEN-QUESTIONS.md) | מה עוד לא הוכרע — דורש את מוטי |
