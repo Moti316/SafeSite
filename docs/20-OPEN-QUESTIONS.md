@@ -5,22 +5,18 @@
 
 ---
 
-## Q1 · בחירת מחסנית {#q1}
-**חוסם:** שלב 2 · **מכריע:** מוטי · **המלצה: Next.js 15 + Supabase**
+## Q1 · ~~בחירת מחסנית~~ — אושר {#q1}
 
-הנימוק המכריע: `Moti316/studi` כבר בנוי על Next.js 15, React 19,
-TypeScript, Supabase, Drizzle, Tailwind, Vitest, Playwright ו-pnpm.
-אותה מחסנית אומרת ש**ארבעת סקריפטי הקורפוס רצים כמו שהם**, בלי התאמה,
-ושמוטי כבר מכיר את הסביבה. Vercel ו-Supabase כבר בשימוש — עלות מעבר אפס.
+**אושר על ידי מוטי, 21.9.2026: Next.js 15 + Supabase.**
 
-עונה על כל הדרישות הקשיחות: SSR, Route Handlers להפקת PDF בצד שרת,
-Serwist ל-Service Worker, RTL נקי, RLS לבידוד ארגוני.
+React 19, TypeScript, Drizzle, Tailwind, Vitest, Playwright, pnpm —
+אותה מחסנית כמו `Moti316/studi`, ולכן סקריפטי הקורפוס ב-`scripts/`
+רצים בלי התאמה. פריסה על Vercel, נתונים ב-Supabase עם RLS.
 
-**פער שזוהה ב-studi וחייב תיקון כאן:** אין בו שום כלי נגישות —
-לא `axe-core`, לא `jest-axe`, לא `eslint-plugin-jsx-a11y`.
-בפרויקט הזה זה שער merge, לא תוספת. ראה [`06-ACCESSIBILITY.md`](06-ACCESSIBILITY.md#שערי-ci).
+**תנאי שאושר יחד:** מוסיפים כלי נגישות ש-studi חסר —
+`axe-core`, `eslint-plugin-jsx-a11y`. שער merge, לא תוספת.
 
-נדרש אישור מוטי, לא החלטת סוכן.
+נימוק מלא: [`18-DECISIONS.md`](18-DECISIONS.md#d5).
 
 ---
 

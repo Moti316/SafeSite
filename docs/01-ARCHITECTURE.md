@@ -48,10 +48,16 @@ Supabase ואת מנוע ה-PDF מ-CDN חיצוני — ויש בה קובץ ב�
 להיות ניתן לחיפוש, קל, ובר-חתימה דיגיטלית. הפקה בצד הלקוח מ-canvas
 נותנת תמונה. פירוט: [`09-REPORT-OUTPUT.md`](09-REPORT-OUTPUT.md).
 
-## בחירת מחסנית — פתוח להכרעה
+## המחסנית — אושרה
 
-ראה [`20-OPEN-QUESTIONS.md`](20-OPEN-QUESTIONS.md#q1). הדרישות הקשיחות
-שכל מחסנית חייבת לספק:
+**Next.js 15 · React 19 · TypeScript · Supabase · Drizzle · Tailwind ·
+Vitest · Playwright · pnpm.** פריסה ב-Vercel, RLS ב-Supabase.
+אושר 21.9.2026 — ראה [`18-DECISIONS.md`](18-DECISIONS.md#d5).
+
+בתוספת חובה, שאינה קיימת ב-studi: `axe-core` ו-`eslint-plugin-jsx-a11y`
+כשערי merge ([`06-ACCESSIBILITY.md`](06-ACCESSIBILITY.md#שערי-ci)).
+
+הדרישות שהיא נבחרה כדי לענות עליהן:
 
 - רינדור בצד השרת או אתר סטטי — לא SPA שנטען לאט ברשת חלשה
 - Service Worker ראשון במעלה, לא תוסף

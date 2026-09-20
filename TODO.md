@@ -34,9 +34,11 @@
 
 ## שלב 2 · תשתית ומערכת עיצוב
 
-- [ ] 🔴 👤 [Q1](docs/20-OPEN-QUESTIONS.md#q1) — אישור מחסנית: Next.js 15 + Supabase (מומלץ)
+- [x] ✅ [Q1](docs/20-OPEN-QUESTIONS.md#q1) — **אושר: Next.js 15 + Supabase**
+- [ ] ⬜ `pnpm create next-app` — TS, Tailwind, App Router
+- [ ] ⬜ Supabase + Drizzle + RLS
 - [ ] ⬜ טוקנים מ-[`docs/05-DESIGN-SYSTEM.md`](docs/05-DESIGN-SYSTEM.md)
-- [ ] ⬜ שערי CI — axe, ניגודיות, מקלדת, סודות
+- [ ] ⬜ שערי CI — axe-core, eslint-plugin-jsx-a11y, ניגודיות, מקלדת, סודות
 - [ ] ⬜ RTL בשורש, מצב כהה ובהיר
 
 ## שלב 3 · מנוע הביקור
@@ -128,5 +130,4 @@
 
 | # | שאלה | מכריע |
 |---|---|---|
-| [Q1](docs/20-OPEN-QUESTIONS.md#q1) | מחסנית | מוטי |
 | [Q2](docs/20-OPEN-QUESTIONS.md#q2) | מידע על צדדים שלישיים | עורך דין |
