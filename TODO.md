@@ -23,12 +23,13 @@
 
 - [x] ✅ ייבוא קורפוס החקיקה — 43 נוסחים ב-`data/legislation/`
 - [x] ✅ העתקת סקריפטי הייבוא והאימות ל-`scripts/`
-- [ ] ⬜ `scripts/extract-library.ts` — 112 סעיפים ל-JSON
-- [ ] ⬜ 13 מסמכי החובה ל-JSON, כולל `validity_period`
+- [x] ✅ `scripts/extract-library.ts` — נכתב, מאמת לפני כתיבה
+- [ ] ⬜ להריץ מול `legacy.html` → 157 סעיפים, 19 מסמכים, 23 קטגוריות
+- [ ] ⬜ למלא `validity_period` ב-19 המסמכים מהאסמכתא
 - [ ] ⬜ אימות ספירות מול [`docs/12-TESTING.md`](docs/12-TESTING.md#אימות-התוכן)
-- [ ] ⬜ מיפוי כל אסמכתא ל-`scope` בקורפוס
+- [ ] ⬜ מיפוי כל אסמכתא ל-`scope` בקורפוס — יסגור גם את [Q6](docs/20-OPEN-QUESTIONS.md#q6)
 - [ ] ⬜ הרצת `verify-legislation` על כל 43 הנוסחים
-- [ ] 👤 [Q3](docs/20-OPEN-QUESTIONS.md#q3) — קטגוריית אש: נותח, לא חוסם — [22](docs/22-FIRE-GAP-ANALYSIS.md)
+- [x] ✅ [Q3](docs/20-OPEN-QUESTIONS.md#q3) — נסגר: 6 סעיפים, לא 1 — [24](docs/24-LIBRARY-MEASURED.md)
 - [ ] 👤 [Q4](docs/20-OPEN-QUESTIONS.md#q4) — PDF מחייב לעגורני-צריח
 
 ## שלב 2 · תשתית ומערכת עיצוב
@@ -120,4 +121,3 @@
 |---|---|---|
 | [Q1](docs/20-OPEN-QUESTIONS.md#q1) | מחסנית | מוטי |
 | [Q2](docs/20-OPEN-QUESTIONS.md#q2) | מידע על צדדים שלישיים | עורך דין |
-| [Q3](docs/20-OPEN-QUESTIONS.md#q3) | קטגוריית אש וחירום | ממונה בטיחות |

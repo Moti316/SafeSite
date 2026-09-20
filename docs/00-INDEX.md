@@ -23,7 +23,8 @@
 
 | # | קובץ | עונה על |
 |---|---|---|
-| 04 | [`04-CONTENT-LIBRARY.md`](04-CONTENT-LIBRARY.md) | 112 הסעיפים, 13 המסמכים, וכללי החילוץ |
+| 04 | [`04-CONTENT-LIBRARY.md`](04-CONTENT-LIBRARY.md) | כללי החילוץ והכלל שאוסר לגעת |
+| 24 | [`24-LIBRARY-MEASURED.md`](24-LIBRARY-MEASURED.md) | **הספרייה כפי שנמדדה** — 157 סעיפים, 23 קטגוריות |
 | 16 | [`16-GLOSSARY.md`](16-GLOSSARY.md) | מה אומר כל מונח מקצועי בעברית |
 | 22 | [`22-FIRE-GAP-ANALYSIS.md`](22-FIRE-GAP-ANALYSIS.md) | למה קטגוריית האש דלה |
 
