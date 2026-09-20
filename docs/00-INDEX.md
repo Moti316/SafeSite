@@ -50,6 +50,7 @@
 |---|---|---|
 | 07 | [`07-LEGAL-COMPLIANCE.md`](07-LEGAL-COMPLIANCE.md) | נגישות, דיוור, פרטיות — מה החוק דורש |
 | 11 | [`11-SECURITY.md`](11-SECURITY.md) | אימות, הרשאות, סודות |
+| 25 | [`25-AI-SECURITY.md`](25-AI-SECURITY.md) | **אבטחת ה-AI** — השילוש הקטלני ושבעת הכללים |
 
 ## תהליך
 
