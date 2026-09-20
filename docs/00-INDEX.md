@@ -25,6 +25,7 @@
 |---|---|---|
 | 04 | [`04-CONTENT-LIBRARY.md`](04-CONTENT-LIBRARY.md) | 112 הסעיפים, 13 המסמכים, וכללי החילוץ |
 | 16 | [`16-GLOSSARY.md`](16-GLOSSARY.md) | מה אומר כל מונח מקצועי בעברית |
+| 22 | [`22-FIRE-GAP-ANALYSIS.md`](22-FIRE-GAP-ANALYSIS.md) | למה קטגוריית האש דלה |
 
 ## חזית
 

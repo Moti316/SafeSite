@@ -28,12 +28,12 @@
 - [ ] ⬜ אימות ספירות מול [`docs/12-TESTING.md`](docs/12-TESTING.md#אימות-התוכן)
 - [ ] ⬜ מיפוי כל אסמכתא ל-`scope` בקורפוס
 - [ ] ⬜ הרצת `verify-legislation` על כל 43 הנוסחים
-- [ ] 🔴 👤 [Q3](docs/20-OPEN-QUESTIONS.md#q3) — קטגוריית אש וחירום
+- [ ] 👤 [Q3](docs/20-OPEN-QUESTIONS.md#q3) — קטגוריית אש: נותח, לא חוסם — [22](docs/22-FIRE-GAP-ANALYSIS.md)
 - [ ] 👤 [Q4](docs/20-OPEN-QUESTIONS.md#q4) — PDF מחייב לעגורני-צריח
 
 ## שלב 2 · תשתית ומערכת עיצוב
 
-- [ ] 🔴 👤 [Q1](docs/20-OPEN-QUESTIONS.md#q1) — בחירת מחסנית
+- [ ] 🔴 👤 [Q1](docs/20-OPEN-QUESTIONS.md#q1) — אישור מחסנית: Next.js 15 + Supabase (מומלץ)
 - [ ] ⬜ טוקנים מ-[`docs/05-DESIGN-SYSTEM.md`](docs/05-DESIGN-SYSTEM.md)
 - [ ] ⬜ שערי CI — axe, ניגודיות, מקלדת, סודות
 - [ ] ⬜ RTL בשורש, מצב כהה ובהיר
