@@ -41,7 +41,7 @@
 |---|---|---|
 | 08 | [`08-VOICE-INTAKE.md`](08-VOICE-INTAKE.md) | הקלטה, תמלול, וואטסאפ |
 | 09 | [`09-REPORT-OUTPUT.md`](09-REPORT-OUTPUT.md) | הפקת ה-PDF והתפוצה |
-| 23 | [`23-WHATSAPP-CHANNEL.md`](23-WHATSAPP-CHANNEL.md) | ערוץ הוואטסאפ — ומה נבנה לפניו |
+| 23 | [`23-INTAKE-CHANNELS.md`](23-INTAKE-CHANNELS.md) | ערוצי קלט — אפליקציה, טלגרם, מייל, וואטסאפ |
 
 ## סיכון וציות
 

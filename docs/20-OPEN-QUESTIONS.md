@@ -69,7 +69,7 @@ Serwist ל-Service Worker, RTL נקי, RLS לבידוד ארגוני.
 ## Q5 · ~~סתירה במספר הוואטסאפ~~ — נסגר {#q5}
 
 **נסגר 21.9.2026.** מוטי: המספר שלהם אינו העניין — הארכיטקטורה כן.
-הועבר ל-[`23-WHATSAPP-CHANNEL.md`](23-WHATSAPP-CHANNEL.md).
+הועבר ל-[`23-INTAKE-CHANNELS.md`](23-INTAKE-CHANNELS.md).
 
 המספר נקבע כמשתנה סביבה (`WHATSAPP_NUMBER`) ואינו החלטת ארכיטקטורה.
 
