@@ -31,6 +31,11 @@ export interface ReviewerDoc {
 }
 
 export interface ReviewExport {
+  /**
+   * `local-file` — ייצוא מקובץ HTML מקומי: שם המאשר ומספר האישור הוקלדו,
+   * ולא נקשרו לחשבון. ללא שדה — ייצוא מדף ב-claude.ai, שבו המאשר מזוהה בחשבונו.
+   */
+  source?: 'local-file';
   decisions: Record<string, DecisionDoc>;
   reviewers: Record<string, ReviewerDoc>;
 }

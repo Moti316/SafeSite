@@ -36,6 +36,9 @@ function main(argv: string[]): number {
     return 1;
   }
   writeFileSync(file, JSON.stringify(next, null, 2) + '\n', 'utf8');
+  if (exp.source === 'local-file') {
+    process.stdout.write('הערה: ההחלטות יובאו מקובץ מקומי — זהות המאשר הוקלדה ולא נקשרה לחשבון.\n');
+  }
   process.stdout.write(JSON.stringify(report, null, 2) + '\n');
   return 0;
 }

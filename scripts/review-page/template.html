@@ -1,314 +1,417 @@
 <title>סקירת ספריית הבדיקה</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-  /* טוקנים לפי docs/05-DESIGN-SYSTEM.md — כהה כברירת מחדל, צבע רק למצב. */
   :root {
-    --bg: #0f1113; --surface: #1a1d21; --surface-2: #24282d; --border: #363b42;
-    --text: #f2f4f6; --text-dim: #a8b0b8;
-    --ok: #4a9d6e; --warn: #d4a017; --bad: #d93025; --focus: #8ab4f8;
-    --r-sm: 6px; --r-md: 12px;
-    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
-    color-scheme: dark;
-  }
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) {
-      --bg: #ffffff; --surface: #f4f6f8; --surface-2: #e8ecef; --border: #c9d0d6;
-      --text: #0f1113; --text-dim: #4a535c;
-      --ok: #2e7550; --warn: #8a6500; --bad: #b3261e; --focus: #1a5fd0;
-      color-scheme: light;
-    }
-  }
-  :root[data-theme="light"] {
-    --bg: #ffffff; --surface: #f4f6f8; --surface-2: #e8ecef; --border: #c9d0d6;
-    --text: #0f1113; --text-dim: #4a535c;
-    --ok: #2e7550; --warn: #8a6500; --bad: #b3261e; --focus: #1a5fd0;
+    --ground: #f4f5f1; --surface: #ffffff; --slip: #f7f6f0; --ink: #1f2a26; --dim: #5e6a65;
+    --line: #dde2dc; --accent: #2f6b5a; --accent-soft: #e3efe9;
+    --ok: #2e7d4f; --ok-soft: #e4f2e9; --change: #8a5d00; --change-soft: #f8efd9;
+    --bad: #b3261e; --bad-soft: #fbe7e5; --focus: #2f6b5a;
+    --shadow: 0 1px 2px rgba(31, 42, 38, .06), 0 4px 16px rgba(31, 42, 38, .06);
+    --r: 16px; --r-sm: 10px;
     color-scheme: light;
   }
-  body { background: var(--bg); color: var(--text); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #111513; --surface: #191f1c; --slip: #1f2622; --ink: #e7ece9; --dim: #9ba8a2;
+      --line: #2b3430; --accent: #7cc4ac; --accent-soft: #1d2d27;
+      --ok: #6cc08f; --ok-soft: #17291f; --change: #e2b04a; --change-soft: #2c2616;
+      --bad: #f08a80; --bad-soft: #2f1a18; --focus: #7cc4ac;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #111513; --surface: #191f1c; --slip: #1f2622; --ink: #e7ece9; --dim: #9ba8a2;
+    --line: #2b3430; --accent: #7cc4ac; --accent-soft: #1d2d27;
+    --ok: #6cc08f; --ok-soft: #17291f; --change: #e2b04a; --change-soft: #2c2616;
+    --bad: #f08a80; --bad-soft: #2f1a18; --focus: #7cc4ac;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); margin: 0; }
   .app {
-    font-family: "IBM Plex Sans Hebrew", "Noto Sans Hebrew", "Arial Hebrew", Arial, sans-serif;
-    font-size: 17px; line-height: 1.6;
-    max-width: 760px; margin-inline: auto; padding-inline: 16px; padding-block: 0 var(--s6);
+    font-family: "IBM Plex Sans Hebrew", "Noto Sans Hebrew", "Segoe UI", Arial, sans-serif;
+    font-size: 17px; line-height: 1.65;
+    max-width: 780px; margin-inline: auto; padding-inline: 16px; padding-block: 28px 120px;
   }
-  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-  h1 { font-size: 24px; line-height: 1.3; margin: 0; text-wrap: balance; }
-  h2 { font-size: 19px; margin: var(--s6) 0 var(--s3); text-wrap: balance; }
-  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace; font-variant-numeric: tabular-nums; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
 
-  .bar {
-    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2;
-    background: var(--bg); border-bottom: 1px solid var(--border);
-    padding-block: var(--s3); margin-bottom: var(--s4);
-    display: grid; gap: var(--s2);
-  }
-  .meta { color: var(--text-dim); font-size: 14px; margin: 0; }
-  .progress { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font-size: 14px; color: var(--text-dim); }
-  .progress b { color: var(--text); }
-  .track { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
-  .track span { display: block; height: 100%; background: var(--text-dim); width: 0; }
-  .filters { display: flex; gap: var(--s2); flex-wrap: wrap; }
+  /* כותרת */
+  .top { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; margin-bottom: 20px; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--accent); margin: 0 0 4px; }
+  h1 { font-size: clamp(24px, 4vw, 30px); line-height: 1.25; margin: 0; text-wrap: balance; }
+  .law-name { color: var(--dim); font-size: 15px; margin: 6px 0 0; }
+  .ring { width: 88px; height: 88px; position: relative; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 8; }
+  .ring .bg { stroke: var(--line); }
+  .ring .fg { stroke: var(--accent); stroke-linecap: round; }
+  .ring span { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 700; font-size: 18px; }
 
-  button, .chip {
-    font: inherit; font-size: 16px; min-height: 48px; padding-inline: var(--s4);
-    border-radius: var(--r-sm); border: 1px solid var(--border);
-    background: var(--surface); color: var(--text); cursor: pointer;
-  }
-  .chip[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
-  button:disabled { opacity: .45; cursor: not-allowed; }
-  .primary { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 600; }
+  .tally { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+  .tally li { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 14px; color: var(--dim); }
+  .tally b { color: var(--ink); font-weight: 600; }
 
-  .notice {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
-    padding: var(--s4); display: grid; gap: var(--s3);
-  }
-  .notice p { margin: 0; }
-  .fields { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  label { display: grid; gap: var(--s1); font-size: 14px; color: var(--text-dim); }
+  .tabs { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; margin-bottom: 20px; }
+  .tabs button { border: 0; background: transparent; color: var(--dim); font: inherit; font-size: 15px; min-height: 40px; padding-inline: 16px; border-radius: 999px; cursor: pointer; }
+  .tabs button[aria-pressed="true"] { background: var(--accent); color: var(--surface); font-weight: 600; }
+
+  /* הודעות */
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; box-shadow: var(--shadow); display: grid; gap: 14px; margin-bottom: 20px; }
+  .panel h2 { font-size: 18px; margin: 0; }
+  .panel p { margin: 0; color: var(--dim); }
+  .fields { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  label.field { display: grid; gap: 6px; font-size: 14px; color: var(--dim); }
   input, textarea {
-    font: inherit; font-size: 17px; color: var(--text); background: var(--bg);
-    border: 1px solid var(--border); border-radius: var(--r-sm); padding: var(--s3); min-height: 48px;
+    font: inherit; font-size: 17px; color: var(--ink); background: var(--ground);
+    border: 1px solid var(--line); border-radius: var(--r-sm); padding: 12px 14px; min-height: 48px; width: 100%;
   }
-  textarea { min-height: 96px; resize: vertical; }
+  textarea { min-height: 100px; resize: vertical; }
+  .btn {
+    font: inherit; font-size: 16px; font-weight: 600; min-height: 48px; padding-inline: 22px;
+    border-radius: var(--r-sm); border: 1px solid var(--accent); background: var(--accent); color: var(--surface); cursor: pointer;
+  }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
 
-  .list { display: grid; gap: var(--s4); }
-  .item {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
-    padding: var(--s4); display: grid; gap: var(--s3);
-  }
-  .item[data-state="approve"] { border-color: var(--ok); }
-  .item[data-state="reject"] { border-color: var(--bad); }
-  .item[data-state="rewrite"], .item[data-state="split"], .item[data-state="conflict"] { border-color: var(--warn); }
-  .head { display: flex; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; align-items: baseline; }
-  .cite { font-size: 14px; color: var(--text-dim); }
-  .id { font-size: 13px; color: var(--text-dim); }
-  .law {
-    margin: 0; padding: var(--s3) var(--s4); background: var(--surface-2);
-    border-inline-start: 3px solid var(--text-dim); border-radius: var(--r-sm);
-    font-size: 16px;
-  }
-  .law small { display: block; font-size: 13px; color: var(--text-dim); margin-top: var(--s1); }
-  .question { font-size: 19px; font-weight: 600; margin: 0; }
-  .note { font-size: 15px; color: var(--text-dim); margin: 0; }
-  .note::before { content: "הערת ניסוח · "; font-weight: 600; }
+  /* כרטיס */
+  .list { display: grid; gap: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; }
+  .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 20px 0; flex-wrap: wrap; }
+  .cite { background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: 14px; border-radius: 999px; padding: 3px 12px; }
+  .id { font-size: 12px; color: var(--dim); }
+  .card-body { padding: 14px 20px 20px; display: grid; gap: 14px; }
+  .slip { margin: 0; background: var(--slip); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 14px 16px; }
+  .slip-label { font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--dim); margin: 0 0 6px; }
+  .slip blockquote { margin: 0; font-family: "Frank Ruhl Libre", "David", "Times New Roman", serif; font-size: 18px; line-height: 1.7; }
+  .slip cite { display: block; font-style: normal; font-size: 13px; color: var(--dim); margin-top: 8px; }
+  .question { font-size: 20px; font-weight: 600; line-height: 1.45; margin: 0; text-wrap: pretty; }
+  .note { background: var(--change-soft); color: var(--ink); border-radius: var(--r-sm); padding: 10px 14px; font-size: 15px; margin: 0; }
+  .note b { color: var(--change); }
 
-  .decide { border: 0; margin: 0; padding: 0; display: grid; gap: var(--s2); }
-  .decide legend { font-size: 14px; color: var(--text-dim); margin-bottom: var(--s1); }
-  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--s2); }
-  .options input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .decide { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .decide legend { font-size: 14px; color: var(--dim); padding: 0; margin-bottom: 8px; }
+  .options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .options.two { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 520px) { .options { grid-template-columns: repeat(2, 1fr); } }
+  .options input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
   .options label {
-    min-height: 48px; display: flex; align-items: center; justify-content: center; gap: var(--s2);
-    border: 1px solid var(--border); border-radius: var(--r-sm); color: var(--text); font-size: 16px;
-    cursor: pointer; background: var(--bg);
+    min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); color: var(--ink);
+    font-size: 15px; font-weight: 500; cursor: pointer; text-align: center; padding: 6px;
   }
+  .options label .ic { font-size: 18px; line-height: 1; }
   .options input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 2px; }
-  .options input:checked + label { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 600; }
-  .actions { display: flex; gap: var(--s2); flex-wrap: wrap; align-items: center; }
-  .status { font-size: 15px; margin: 0; }
-  .status[data-kind="approve"] { color: var(--ok); }
+  .options input:disabled + label { cursor: not-allowed; opacity: .55; }
+  .options input:checked + label[data-v="approve"], .options input:checked + label[data-v="agree"] { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); font-weight: 700; }
+  .options input:checked + label[data-v="rewrite"], .options input:checked + label[data-v="split"], .options input:checked + label[data-v="draft"] { background: var(--change-soft); border-color: var(--change); color: var(--change); font-weight: 700; }
+  .options input:checked + label[data-v="reject"] { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); font-weight: 700; }
+  .extra { display: grid; gap: 10px; }
+  .extra:empty { display: none; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .row:empty { display: none; }
+  .status { font-size: 15px; font-weight: 600; margin: 0; }
+  .status[data-kind="approve"], .status[data-kind="agree"] { color: var(--ok); }
   .status[data-kind="reject"] { color: var(--bad); }
-  .status[data-kind="rewrite"], .status[data-kind="split"], .status[data-kind="conflict"] { color: var(--warn); }
+  .status[data-kind="rewrite"], .status[data-kind="split"], .status[data-kind="draft"], .status[data-kind="conflict"] { color: var(--change); }
+  .card[data-state="approve"], .card[data-state="agree"] { border-color: var(--ok); }
+  .card[data-state="reject"] { border-color: var(--bad); }
+  .card[data-state="rewrite"], .card[data-state="split"], .card[data-state="draft"], .card[data-state="conflict"] { border-color: var(--change); }
   .error { color: var(--bad); font-size: 15px; margin: 0; }
-  @media (prefers-reduced-motion: no-preference) { .track span { transition: width .3s ease; } }
+  .error:empty { display: none; }
+
+  h2.section { font-size: 20px; margin: 40px 0 6px; }
+  .section-note { color: var(--dim); margin: 0 0 16px; }
+  .empty { text-align: center; color: var(--dim); padding: 40px 16px; background: var(--surface); border: 1px dashed var(--line); border-radius: var(--r); margin: 0; }
+
+  /* סרגל תחתון */
+  .dock {
+    position: fixed; inset-inline: 0; bottom: 0; z-index: 5;
+    background: var(--surface); border-top: 1px solid var(--line);
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+  .dock-inner { max-width: 780px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .dock-text { font-size: 15px; color: var(--dim); margin: 0; }
+  .dock-text b { color: var(--ink); }
+  .bar { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; flex: 1 1 120px; max-width: 220px; }
+  .bar span { display: block; height: 100%; background: var(--accent); width: 0; border-radius: 999px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .bar span, .ring .fg { transition: all .35s ease; }
+    .card { transition: border-color .2s ease; }
+  }
 </style>
 
 <div class="app" dir="rtl" lang="he">
-  <header class="bar">
-    <h1 id="title">סקירת טיוטה</h1>
-    <p class="meta" id="meta"></p>
-    <div class="track" aria-hidden="true"><span id="track"></span></div>
-    <p class="progress" id="progress" aria-live="polite"></p>
-    <div class="filters" role="group" aria-label="סינון">
-      <button type="button" class="chip" data-filter="open" aria-pressed="true">ממתינים</button>
-      <button type="button" class="chip" data-filter="done" aria-pressed="false">הוחלטו</button>
-      <button type="button" class="chip" data-filter="all" aria-pressed="false">הכל</button>
+  <header class="top">
+    <div>
+      <p class="eyebrow">טיוטה לאישור ממונה</p>
+      <h1 id="title">סקירת ספריית הבדיקה</h1>
+      <p class="law-name" id="law"></p>
+    </div>
+    <div class="ring" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="42"></circle><circle class="fg" id="ring" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="264"></circle></svg>
+      <span id="ring-pct">0%</span>
     </div>
   </header>
 
-  <section id="gate" class="notice" hidden></section>
+  <ul class="tally" id="tally" aria-live="polite"></ul>
+
+  <div class="tabs" role="group" aria-label="סינון הסעיפים">
+    <button type="button" data-filter="open" aria-pressed="true">ממתינים</button>
+    <button type="button" data-filter="done" aria-pressed="false">הוחלטו</button>
+    <button type="button" data-filter="all" aria-pressed="false">הכל</button>
+  </div>
+
+  <section id="gate" class="panel" hidden></section>
   <div id="items" class="list"></div>
 
-  <h2 id="nd-title">הצעות שלא לנסח בדיקה</h2>
-  <p class="meta">מועמדי חובה שהוצע להשאיר מחוץ לספרייה. גם כאן ההחלטה שלך.</p>
+  <h2 class="section" id="nd-title">הצעות שלא לנסח בדיקה</h2>
+  <p class="section-note" id="nd-note">מועמדי חובה שהוצע להשאיר מחוץ לספרייה. גם כאן ההחלטה שלך.</p>
   <div id="not-drafted" class="list"></div>
+</div>
+
+<div class="dock" dir="rtl" lang="he">
+  <div class="dock-inner">
+    <p class="dock-text" id="dock-text"></p>
+    <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+    <button type="button" class="btn" id="export" hidden>ייצוא החלטות</button>
+  </div>
 </div>
 
 <script id="batch-data" type="application/json">/*__BATCH__*/</script>
 <script>
 (() => {
   const batch = JSON.parse(document.getElementById('batch-data').textContent);
-  const LABELS = { approve: 'מאשר', rewrite: 'מנסח מחדש', split: 'מפצל', reject: 'דוחה' };
-  const ND_LABELS = { agree: 'מסכים — לא לנסח', draft: 'דורש ניסוח' };
-  // כל ה"מונים" נגזרים מההחלטות בזמן הרינדור (הכלל השלישי ב-CLAUDE.md).
-  const state = { db: null, me: null, reviewer: null, decisions: new Map(), filter: 'open', writable: true,
-    // בחירה וטקסט שעוד לא נשמרו — שורדים רינדור מחדש כשמגיעה החלטה של מישהו אחר.
-    pending: new Map() };
+  const OPTIONS = {
+    approve: { label: 'מאשר', ic: '✓' },
+    rewrite: { label: 'מנסח מחדש', ic: '✎' },
+    split: { label: 'מפצל', ic: '⑂' },
+    reject: { label: 'דוחה', ic: '✕' },
+  };
+  const ND_OPTIONS = {
+    agree: { label: 'מסכים — לא לנסח', ic: '✓' },
+    draft: { label: 'דורש ניסוח', ic: '✎' },
+  };
+  const LOCAL_ID = 'local';
+  const STORE_KEY = 'review:' + batch.batch;
 
-  const $ = (s, el = document) => el.querySelector(s);
-  const el = (tag, attrs = {}, ...kids) => {
+  // שני מצבים: דף ב-claude.ai (מסד נתונים + זהות חשבון) או קובץ מקומי (דפדפן + ייצוא).
+  // כל המספרים נגזרים מההחלטות בזמן הרינדור — אין מונה שמור.
+  const state = {
+    mode: 'loading', db: null, me: null, reviewer: null, writable: true,
+    decisions: new Map(), pending: new Map(), filter: 'open',
+  };
+
+  const $ = (s) => document.querySelector(s);
+  function el(tag, attrs, ...kids) {
     const n = document.createElement(tag);
-    for (const [k, v] of Object.entries(attrs)) {
-      if (k === 'text') n.textContent = v; else if (v !== false && v != null) n.setAttribute(k, v === true ? '' : v);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (k === 'text') n.textContent = v;
+      else if (v === true) n.setAttribute(k, '');
+      else if (v !== false && v != null) n.setAttribute(k, v);
     }
     for (const k of kids) if (k) n.append(k);
     return n;
-  };
+  }
   const safeId = (s) => s.replace(/[^A-Za-z0-9_-]/g, '_');
 
-  function myDecision(key) {
-    return state.me ? state.decisions.get(key + '~' + state.me) : undefined;
+  // ── אחסון מקומי ─────────────────────────────────────────────
+  function loadLocal() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      state.reviewer = saved.reviewer || null;
+      state.decisions = new Map(Object.entries(saved.decisions || {}));
+    } catch (e) { /* דפדפן בלי אחסון — ממשיכים בלי שמירה */ }
   }
-  function allFor(key) {
-    return [...state.decisions.entries()].filter(([k]) => k.startsWith(key + '~')).map(([, v]) => v);
+  function saveLocal() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ reviewer: state.reviewer, decisions: Object.fromEntries(state.decisions) }));
+      return true;
+    } catch (e) { return false; }
   }
+
+  // ── נגזרות ─────────────────────────────────────────────────
+  const myKey = (key) => key + '~' + state.me;
+  const mine = (key) => (state.me ? state.decisions.get(myKey(key)) : undefined);
   function summary(key) {
-    const ds = allFor(key);
+    const ds = [...state.decisions.entries()].filter(([k]) => k.startsWith(key + '~')).map(([, v]) => v);
     if (ds.length === 0) return null;
     const kinds = new Set(ds.map((d) => d.decision));
     return kinds.size > 1 ? 'conflict' : ds[0].decision;
   }
+  const allKeys = () => [...batch.items.map((i) => i.id), ...batch.not_drafted.map((_, n) => 'nd-' + n)];
+  const canWrite = () => state.mode === 'local' ? !!state.reviewer : !!(state.db && state.me && state.reviewer && state.writable);
 
+  // ── כתיבת החלטה ────────────────────────────────────────────
+  async function writeDecision(key, body) {
+    const doc = { ...body, by: state.me, at: new Date().toISOString(), batch: batch.batch };
+    if (state.mode === 'local') {
+      state.decisions.set(myKey(key), doc);
+      if (!saveLocal()) throw { code: 'storage' };
+      state.pending.delete(key);
+      renderAll();
+      return;
+    }
+    await state.db.doc('decisions/' + myKey(key)).set(doc);
+    state.pending.delete(key);
+  }
+
+  // ── רינדור ─────────────────────────────────────────────────
   function renderHeader() {
     $('#title').textContent = 'סקירת טיוטה · ' + batch.category.label;
-    $('#meta').textContent = batch.law + ' · ' + batch.items.length + ' בדיקות · נוסח ב-' + batch.drafted_on + ' (' + batch.drafted_by + ')';
-    const keys = [...batch.items.map((i) => i.id), ...batch.not_drafted.map((_, n) => 'nd-' + n)];
-    const done = keys.filter((k) => myDecision(k)).length;
-    const counts = { approve: 0, rewrite: 0, split: 0, reject: 0 };
-    for (const i of batch.items) { const d = myDecision(i.id); if (d) counts[d.decision]++; }
-    $('#track').style.width = (keys.length ? (100 * done / keys.length) : 0) + '%';
-    const p = $('#progress');
-    p.replaceChildren(
-      el('span', {}, el('b', { text: String(done) }), ' מתוך ' + keys.length + ' הוחלטו'),
-      el('span', { text: 'אושרו ' + counts.approve }),
-      el('span', { text: 'נוסחו מחדש ' + counts.rewrite }),
-      el('span', { text: 'פוצלו ' + counts.split }),
-      el('span', { text: 'נדחו ' + counts.reject }),
+    const author = /^claude/i.test(batch.drafted_by) ? 'Claude' : batch.drafted_by;
+    $('#law').textContent = batch.law + ' · טיוטה של ' + author + ', ' + batch.drafted_on;
+    const keys = allKeys();
+    const done = keys.filter((k) => mine(k)).length;
+    const pct = keys.length ? Math.round((100 * done) / keys.length) : 0;
+    $('#ring').setAttribute('stroke-dashoffset', String(264 - (264 * pct) / 100));
+    $('#ring-pct').textContent = pct + '%';
+    const c = { approve: 0, rewrite: 0, split: 0, reject: 0 };
+    for (const i of batch.items) { const d = mine(i.id); if (d && d.decision in c) c[d.decision]++; }
+    $('#tally').replaceChildren(
+      el('li', {}, el('b', { text: String(batch.items.length) }), ' בדיקות'),
+      el('li', {}, el('b', { text: String(c.approve) }), ' אושרו'),
+      el('li', {}, el('b', { text: String(c.rewrite) }), ' נוסחו מחדש'),
+      el('li', {}, el('b', { text: String(c.split) }), ' לפיצול'),
+      el('li', {}, el('b', { text: String(c.reject) }), ' נדחו'),
     );
+    $('#dock-text').replaceChildren(el('b', { text: done + ' מתוך ' + keys.length }), ' הוחלטו');
+    $('#bar').style.width = pct + '%';
+    $('#export').hidden = state.mode !== 'local';
+    $('#export').disabled = done === 0;
   }
 
   function renderGate() {
     const gate = $('#gate');
-    if (!state.db) {
-      gate.hidden = false;
-      gate.replaceChildren(el('p', { text: 'שמירת ההחלטות אינה זמינה בתצוגה הזו. אפשר לקרוא את הטיוטות, אבל לא לאשר.' }));
-      return;
-    }
-    if (!state.me) {
-      gate.hidden = false;
-      gate.replaceChildren(el('p', { text: 'אישור מחייב זיהוי. יש להיכנס לחשבון claude.ai של הארגון.' }));
-      return;
-    }
-    if (!state.writable) {
-      gate.hidden = false;
-      gate.replaceChildren(el('p', { text: 'אין לך הרשאת עריכה בדף הזה, ולכן אי אפשר לשמור החלטות. בעל הדף יכול להעניק "Can edit".' }));
-      return;
-    }
+    const show = (...kids) => { gate.hidden = false; gate.replaceChildren(...kids); };
+    if (state.mode === 'loading') { gate.hidden = true; return; }
+    if (state.mode === 'cloud' && !state.me) return show(el('p', { text: 'אישור מחייב כניסה לחשבון claude.ai של הארגון. בינתיים אפשר לקרוא.' }));
+    if (state.mode === 'cloud' && !state.writable) return show(el('p', { text: 'אין לך הרשאת עריכה בדף הזה, ולכן אי אפשר לשמור החלטות. בעל הדף יכול להעניק "Can edit".' }));
     if (state.reviewer) { gate.hidden = true; return; }
-    gate.hidden = false;
-    const name = el('input', { id: 'rv-name', autocomplete: 'name', required: true });
-    const lic = el('input', { id: 'rv-license', inputmode: 'numeric', required: true });
+    const name = el('input', { id: 'rv-name', autocomplete: 'name' });
+    const lic = el('input', { id: 'rv-license', inputmode: 'numeric' });
     const err = el('p', { class: 'error', role: 'alert' });
-    const save = el('button', { type: 'button', class: 'primary', text: 'שמירת פרטי המאשר' });
+    const save = el('button', { type: 'button', class: 'btn', text: 'שמירה והתחלה' });
     save.addEventListener('click', async () => {
-      const full_name = name.value.trim(); const license_no = lic.value.trim();
+      const full_name = name.value.trim();
+      const license_no = lic.value.trim();
       if (!full_name || !license_no) { err.textContent = 'נדרשים שם מלא ומספר אישור כשירות.'; return; }
       save.disabled = true;
       try {
-        await state.db.doc('reviewers/' + state.me).set({ full_name, license_no, at: new Date().toISOString() });
-        state.reviewer = { full_name, license_no };
+        if (state.mode === 'local') { state.reviewer = { full_name, license_no }; saveLocal(); }
+        else {
+          await state.db.doc('reviewers/' + state.me).set({ full_name, license_no, at: new Date().toISOString() });
+          state.reviewer = { full_name, license_no };
+        }
         renderAll();
-      } catch (e) { err.textContent = 'השמירה נכשלה: ' + (e && e.code || 'שגיאה'); save.disabled = false; }
+      } catch (e) { err.textContent = 'השמירה נכשלה. לנסות שוב.'; save.disabled = false; }
     });
-    gate.replaceChildren(
-      el('p', { text: 'לפני האישור הראשון: הפרטים האלה ייכתבו בשדה reviewed_by של כל סעיף שתאשר. הם נקשרים לחשבון שלך, ולא לטקסט חופשי.' }),
+    const why = state.mode === 'local'
+      ? 'הפרטים נשמרים בדפדפן הזה בלבד ונכנסים לקובץ הייצוא. הם יירשמו כמאשר של כל סעיף שתאשר.'
+      : 'הפרטים נקשרים לחשבון שלך, ויירשמו כמאשר של כל סעיף שתאשר.';
+    show(
+      el('h2', { text: 'לפני שמתחילים' }),
+      el('p', { text: why }),
       el('div', { class: 'fields' },
-        el('label', { for: 'rv-name' }, 'שם מלא', name),
-        el('label', { for: 'rv-license' }, 'מספר אישור כשירות (משרד העבודה)', lic)),
-      el('div', { class: 'actions' }, save), err);
+        el('label', { class: 'field', for: 'rv-name' }, 'שם מלא', name),
+        el('label', { class: 'field', for: 'rv-license' }, 'מספר אישור כשירות (משרד העבודה)', lic)),
+      el('div', { class: 'row' }, save), err,
+    );
   }
 
-  function statusLine(key) {
-    const s = summary(key);
-    const mine = myDecision(key);
-    if (s === 'conflict') return el('p', { class: 'status', 'data-kind': 'conflict', text: '▲ מאשרים שונים החליטו אחרת — דורש יישוב' });
-    if (!mine) return null;
-    const label = LABELS[mine.decision] || ND_LABELS[mine.decision];
-    const mark = mine.decision === 'approve' || mine.decision === 'agree' ? '✓ ' : '▲ ';
-    return el('p', { class: 'status', 'data-kind': mine.decision, text: mark + 'ההחלטה שלך: ' + label });
-  }
-
-  function decisionForm(key, options, extra, onSave) {
-    const mine = myDecision(key);
-    const pend = state.pending.get(key) || {};
-    const canWrite = !!(state.db && state.me && state.reviewer && state.writable);
-    const fs = el('fieldset', { class: 'decide' }, el('legend', { text: 'החלטה' }));
-    const opts = el('div', { class: 'options' });
-    for (const [value, label] of Object.entries(options)) {
-      const id = 'd-' + safeId(key) + '-' + value;
-      const input = el('input', { type: 'radio', name: 'd-' + safeId(key), id, value, checked: (pend.decision || (mine && mine.decision)) === value, disabled: !canWrite });
-      opts.append(input, el('label', { for: id, text: label }));
-    }
-    fs.append(opts);
-    const extraBox = el('div', { class: 'decide' });
-    const err = el('p', { class: 'error', role: 'alert' });
-    const save = el('button', { type: 'button', class: 'primary', text: 'שמירת ההחלטה', disabled: !canWrite });
-    const sync = () => {
-      const v = (fs.querySelector('input:checked') || {}).value;
-      const p = state.pending.get(key) || {};
-      extraBox.replaceChildren(...(v ? extra(v, mine, p.text) : []));
-    };
-    fs.addEventListener('change', () => {
-      const v = (fs.querySelector('input:checked') || {}).value;
-      state.pending.set(key, { decision: v });
-      sync();
-    });
-    extraBox.addEventListener('input', (e) => {
-      const p = state.pending.get(key) || {};
-      state.pending.set(key, { ...p, decision: p.decision || (fs.querySelector('input:checked') || {}).value, text: e.target.value });
-    });
-    sync();
-    save.addEventListener('click', async () => {
-      const v = (fs.querySelector('input:checked') || {}).value;
-      if (!v) { err.textContent = 'לבחור החלטה לפני השמירה.'; return; }
-      const body = onSave(v, extraBox);
-      if (typeof body === 'string') { err.textContent = body; return; }
-      save.disabled = true; err.textContent = '';
-      try {
-        await state.db.doc('decisions/' + key + '~' + state.me).set({
-          ...body, decision: v, by: state.me, at: new Date().toISOString(), batch: batch.batch,
-        });
-        state.pending.delete(key);
-      } catch (e) {
-        err.textContent = e && e.code === 'invalid_argument'
-          ? 'אין לך הרשאה לשמור החלטות בדף הזה.'
-          : 'השמירה נכשלה (' + (e && e.code || 'שגיאה') + '). לנסות שוב.';
-      } finally { save.disabled = false; }
-    });
-    return [fs, extraBox, el('div', { class: 'actions' }, save, statusLine(key)), err];
+  function statusLine(key, opts) {
+    if (summary(key) === 'conflict') return el('p', { class: 'status', 'data-kind': 'conflict', text: '▲ מאשרים שונים החליטו אחרת — דורש יישוב' });
+    const d = mine(key);
+    if (!d) return null;
+    return el('p', { class: 'status', 'data-kind': d.decision, text: 'נשמר: ' + opts[d.decision].label });
   }
 
   function textArea(id, label, value) {
-    const t = el('textarea', { id }); t.value = value || '';
-    return el('label', { for: id }, label, t);
+    const t = el('textarea', { id });
+    t.value = value || '';
+    return el('label', { class: 'field', for: id }, label, t);
+  }
+
+  /**
+   * טופס החלטה. `quick` — החלטות שנשמרות בלחיצה אחת (מאשר / מסכים).
+   * `extra(v, typed, saved)` מחזיר שדות נוספים; `build(v, box)` מחזיר גוף לשמירה או הודעת שגיאה.
+   */
+  function decisionForm(key, opts, quick, extra, build) {
+    const d = mine(key);
+    const pend = state.pending.get(key) || {};
+    const writable = canWrite();
+    const fs = el('fieldset', { class: 'decide' }, el('legend', { text: 'ההחלטה שלך' }));
+    const row = el('div', { class: 'options' + (Object.keys(opts).length === 2 ? ' two' : '') });
+    for (const [v, o] of Object.entries(opts)) {
+      const id = 'd-' + safeId(key) + '-' + v;
+      row.append(
+        el('input', { type: 'radio', name: 'd-' + safeId(key), id, value: v, checked: (pend.decision || (d && d.decision)) === v, disabled: !writable }),
+        el('label', { for: id, 'data-v': v }, el('span', { class: 'ic', 'aria-hidden': 'true', text: o.ic }), o.label),
+      );
+    }
+    fs.append(row);
+    const box = el('div', { class: 'extra' });
+    const err = el('p', { class: 'error', role: 'alert' });
+    const save = el('button', { type: 'button', class: 'btn', text: 'שמירה' });
+    const actions = el('div', { class: 'row' });
+    const chosen = () => (fs.querySelector('input:checked') || {}).value;
+
+    async function commit(v) {
+      const body = build(v, box);
+      if (typeof body === 'string') { err.textContent = body; return; }
+      err.textContent = '';
+      save.disabled = true;
+      try { await writeDecision(key, { ...body, decision: v }); }
+      catch (e) {
+        err.textContent = e && e.code === 'invalid_argument' ? 'אין לך הרשאה לשמור החלטות בדף הזה.'
+          : e && e.code === 'storage' ? 'הדפדפן לא מאפשר שמירה. כדאי לייצא עכשיו.'
+          : 'השמירה נכשלה. לנסות שוב.';
+      } finally { save.disabled = false; }
+    }
+
+    function sync() {
+      const v = chosen();
+      const p = state.pending.get(key) || {};
+      const fields = v ? extra(v, p.text, d) : [];
+      box.replaceChildren(...fields);
+      actions.replaceChildren(...[fields.length ? save : null, statusLine(key, opts)].filter(Boolean));
+    }
+    fs.addEventListener('change', () => {
+      const v = chosen();
+      state.pending.set(key, { decision: v });
+      if (quick.includes(v)) commit(v); else sync();
+    });
+    box.addEventListener('input', (e) => {
+      const p = state.pending.get(key) || {};
+      state.pending.set(key, { ...p, decision: p.decision || chosen(), text: e.target.value });
+    });
+    save.addEventListener('click', () => { const v = chosen(); if (v) commit(v); });
+    sync();
+    return [fs, box, actions, err];
   }
 
   function renderItem(item) {
     const key = item.id;
-    const card = el('article', { class: 'item', 'data-state': summary(key) || 'open', 'aria-labelledby': 'q-' + key });
-    card.append(...[
-      el('div', { class: 'head' },
-        el('span', { class: 'cite', text: item.citation.section }),
-        el('span', { class: 'id mono', text: item.id })),
-      el('blockquote', { class: 'law' }, item.source_excerpt, el('small', { text: item.citation.law })),
-      el('p', { class: 'question', id: 'q-' + key, text: item.text }),
-      item.drafting_note ? el('p', { class: 'note', text: item.drafting_note }) : null,
-      ...decisionForm(key, LABELS,
-        (v, mine, typed) => {
+    const card = el('article', { class: 'card', 'data-state': summary(key) || 'open', 'aria-labelledby': 'q-' + safeId(key) });
+    const body = el('div', { class: 'card-body' },
+      el('figure', { class: 'slip' },
+        el('p', { class: 'slip-label', text: 'מתוך החוק' }),
+        el('blockquote', { text: item.source_excerpt }),
+        el('cite', { text: item.citation.law })),
+      el('p', { class: 'question', id: 'q-' + safeId(key), text: item.text }),
+      item.drafting_note ? el('p', { class: 'note' }, el('b', { text: 'הערת ניסוח: ' }), item.drafting_note) : null,
+      ...decisionForm(key, OPTIONS, ['approve'],
+        (v, typed, d) => {
           const id = 'x-' + safeId(key);
-          if (v === 'rewrite') return [textArea(id, 'הנוסח שלך לשאלה', typed ?? ((mine && mine.text) || item.text))];
-          if (v === 'split') return [textArea(id, 'איך לפצל (הטיוטות החדשות יחזרו לסקירה)', typed ?? (mine && mine.note))];
-          if (v === 'reject') return [textArea(id, 'נימוק הדחייה (ייכנס לדוח הכיסוי)', typed ?? (mine && mine.note))];
+          if (v === 'rewrite') return [textArea(id, 'הנוסח שלך לשאלה', typed ?? ((d && d.text) || item.text))];
+          if (v === 'split') return [textArea(id, 'איך לפצל? הטיוטות החדשות יחזרו אליך לסקירה', typed ?? (d && d.note))];
+          if (v === 'reject') return [textArea(id, 'למה לדחות? הנימוק ייכנס לדוח הכיסוי', typed ?? (d && d.note))];
           return [];
         },
         (v, box) => {
@@ -316,31 +419,38 @@
           const val = t ? t.value.trim() : '';
           const base = { seen_text: item.text, seen_excerpt: item.source_excerpt };
           if (v === 'rewrite') {
-            if (!val.endsWith('?')) return 'הנוסח החדש צריך להיות שאלה (להסתיים ב-?).';
-            if (val === item.text) return 'הנוסח זהה למקור — לבחור "מאשר".';
+            if (!val.endsWith('?')) return 'הנוסח החדש צריך להיות שאלה, שמסתיימת בסימן שאלה.';
+            if (val === item.text) return 'הנוסח זהה למקור. אם הוא טוב — "מאשר".';
             return { ...base, text: val };
           }
-          if ((v === 'split' || v === 'reject') && val.length < 5) return 'נדרש הסבר קצר.';
+          if ((v === 'split' || v === 'reject') && val.length < 5) return 'צריך הסבר קצר.';
           return v === 'approve' ? base : { ...base, note: val };
         }),
-    ].filter(Boolean));
+    );
+    card.append(
+      el('div', { class: 'card-head' },
+        el('span', { class: 'cite', text: item.citation.section }),
+        el('span', { class: 'id mono', text: item.id })),
+      body,
+    );
     return card;
   }
 
   function renderNotDrafted(nd, n) {
     const key = 'nd-' + n;
-    const card = el('article', { class: 'item', 'data-state': (summary(key) === 'agree' ? 'approve' : summary(key)) || 'open' });
+    const card = el('article', { class: 'card', 'data-state': summary(key) || 'open' });
     card.append(
-      el('div', { class: 'head' }, el('span', { class: 'cite mono', text: nd.candidate })),
-      el('p', { class: 'note', text: nd.reason }),
-      ...decisionForm(key, ND_LABELS,
-        (v, mine, typed) => v === 'draft' ? [textArea('x-' + key, 'מה לבדוק', typed ?? (mine && mine.note))] : [],
-        (v, box) => {
-          const t = box.querySelector('textarea');
-          const val = t ? t.value.trim() : '';
-          if (v === 'draft' && val.length < 5) return 'לתאר בקצרה מה צריך לבדוק.';
-          return { candidate: nd.candidate, note: val };
-        }),
+      el('div', { class: 'card-head' }, el('span', { class: 'cite mono', text: nd.candidate })),
+      el('div', { class: 'card-body' },
+        el('p', { class: 'note' }, el('b', { text: 'למה לא לנסח: ' }), nd.reason),
+        ...decisionForm(key, ND_OPTIONS, ['agree'],
+          (v, typed, d) => v === 'draft' ? [textArea('x-' + key, 'מה צריך לבדוק?', typed ?? (d && d.note))] : [],
+          (v, box) => {
+            const t = box.querySelector('textarea');
+            const val = t ? t.value.trim() : '';
+            if (v === 'draft' && val.length < 5) return 'לתאר בקצרה מה צריך לבדוק.';
+            return { candidate: nd.candidate, note: val };
+          })),
     );
     return card;
   }
@@ -348,11 +458,30 @@
   function renderAll() {
     renderHeader();
     renderGate();
-    const show = (key) => state.filter === 'all' || (state.filter === 'open' ? !myDecision(key) : !!myDecision(key));
-    $('#items').replaceChildren(...batch.items.filter((i) => show(i.id)).map(renderItem));
-    $('#not-drafted').replaceChildren(...batch.not_drafted.map((nd, n) => ({ nd, n })).filter(({ n }) => show('nd-' + n)).map(({ nd, n }) => renderNotDrafted(nd, n)));
-    $('#nd-title').hidden = $('#not-drafted').childElementCount === 0;
+    const show = (key) => state.filter === 'all' || (state.filter === 'open' ? !mine(key) : !!mine(key));
+    const items = batch.items.filter((i) => show(i.id)).map(renderItem);
+    $('#items').replaceChildren(...(items.length ? items : [el('p', { class: 'empty', text: state.filter === 'open' ? 'אין סעיפים ממתינים.' : 'עוד לא הוחלט על אף סעיף.' })]));
+    const nds = batch.not_drafted.map((nd, n) => ({ nd, n })).filter(({ n }) => show('nd-' + n));
+    $('#not-drafted').replaceChildren(...nds.map(({ nd, n }) => renderNotDrafted(nd, n)));
+    $('#nd-title').hidden = nds.length === 0;
+    $('#nd-note').hidden = nds.length === 0;
   }
+
+  // ── ייצוא (מצב מקומי) ──────────────────────────────────────
+  $('#export').addEventListener('click', () => {
+    const out = {
+      source: 'local-file',
+      batch: batch.batch,
+      exported_at: new Date().toISOString(),
+      decisions: Object.fromEntries(state.decisions),
+      reviewers: state.reviewer ? { [LOCAL_ID]: state.reviewer } : {},
+    };
+    const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+    const a = el('a', { href: URL.createObjectURL(blob), download: 'review-' + batch.batch + '.json' });
+    document.body.append(a);
+    a.click();
+    a.remove();
+  });
 
   for (const b of document.querySelectorAll('[data-filter]')) {
     b.addEventListener('click', () => {
@@ -362,26 +491,34 @@
     });
   }
 
-  renderAll();
+  function startLocal() {
+    state.mode = 'local';
+    state.me = LOCAL_ID;
+    state.db = null;
+    loadLocal();
+    renderAll();
+  }
 
+  renderAll();
+  const claude = window.claude;
+  if (!claude || !claude.use) { startLocal(); return; }
   (async () => {
-    const claude = window.claude;
-    if (!claude || !claude.use) return;
     const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) { startLocal(); return; }
+    state.mode = 'cloud';
     state.db = db;
     if (user) {
       state.me = await user.id();
       const can = await user.can('data.write');
-      const canEdit = await user.canEdit();
-      state.writable = can === null ? true : canEdit;
+      state.writable = can === null ? true : await user.canEdit();
     }
-    if (db && state.me) {
+    if (state.me) {
       const rv = await db.doc('reviewers/' + state.me).get();
       if (rv.exists) state.reviewer = rv.data();
-      db.collection('decisions').where('batch', '==', batch.batch).onSnapshot((snap) => {
-        state.decisions = new Map(snap.docs.map((d) => [d.id, d.data()]));
-        renderAll();
-      }, () => { state.db = null; renderAll(); });
+      db.collection('decisions').where('batch', '==', batch.batch).onSnapshot(
+        (snap) => { state.decisions = new Map(snap.docs.map((d) => [d.id, d.data()])); renderAll(); },
+        () => { startLocal(); },
+      );
     }
     renderAll();
   })();
