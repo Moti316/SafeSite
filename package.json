@@ -15,7 +15,8 @@
     "library:extract": "tsx scripts/extract-obligations.ts",
     "library:check": "tsx scripts/extract-obligations.ts --check",
     "corpus:check": "tsx scripts/corpus-hashes.ts --check",
-    "corpus:hash": "tsx scripts/corpus-hashes.ts --write"
+    "corpus:hash": "tsx scripts/corpus-hashes.ts --write",
+    "library:drafts": "tsx scripts/validate-drafts.ts"
   },
   "devDependencies": {
     "@types/node": "22.19.19",
