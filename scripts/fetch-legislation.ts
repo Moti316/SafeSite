@@ -51,7 +51,7 @@ import {
 // ─── Paths / constants ──────────────────────────────────────────────────
 const CACHE_DIR = resolve('.cache', 'nevo');
 const LOGS_DIR = resolve('logs');
-const LEGISLATION_ROOT = resolve('courses', 'safety-officer', 'sources', 'legislation');
+const LEGISLATION_ROOT = resolve('data', 'legislation');
 const USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) StudiBuilder/legislation-fetch (public-domain corpus)';
 const EXTRACTOR_TAG = 'fetch-legislation@1';

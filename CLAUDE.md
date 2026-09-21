@@ -59,8 +59,9 @@
 (Next.js 15 + Supabase) קמה בשלב 2.
 
 חולצו החובות מ-2.2 ומ-2.1 ל-`data/obligations/` בעזרת
-`scripts/extract-obligations.ts` (הרצה: `node scripts/extract-obligations.ts`,
-בדיקות: `node --test "scripts/*.test.ts"`, שתיהן על Node 24 בלי תלויות).
+`scripts/extract-obligations.ts`. פקודות (pnpm 9.12, כל התלויות נעוצות):
+`pnpm test` · `pnpm typecheck` · `pnpm library:extract` · `pnpm library:check` ·
+`pnpm legislation:verify`.
 **המועמדים אינם סעיפי בדיקה** — הבא בתור הוא ניסוח טיוטה, ואחריו
 אישור ממונה בטיחות, שחוסם ייצור.
-ראה [`docs/14-ROADMAP.md`](docs/14-ROADMAP.md) ואת שלב 1 ב-`TODO.md`.
+**הצעד הבא תמיד ב-[`docs/26-EXECUTION-PLAN.md`](docs/26-EXECUTION-PLAN.md)** וב-`TODO.md`.

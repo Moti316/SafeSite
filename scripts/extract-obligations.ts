@@ -10,9 +10,9 @@
  * העיקרון שמכוון את ההחלטות כאן: החמצה גרועה מרעש. מועמד מיותר עולה לממונה
  * עשר שניות של דחייה; חובה שלא חולצה נעלמת גם ממדידת הכיסוי.
  *
- * הרצה (Node 24, ללא תלויות):
- *   node scripts/extract-obligations.ts            # 2.2 ו-2.1 → data/obligations/
- *   node scripts/extract-obligations.ts --check    # רק מוודא שהפלט בריפו עדכני
+ * הרצה:
+ *   pnpm library:extract     # 2.2 ו-2.1 → data/obligations/
+ *   pnpm library:check       # רק מוודא שהפלט בריפו עדכני
  */
 
 import { createHash } from 'node:crypto';
@@ -141,18 +141,17 @@ function isActor(w: string): boolean {
 /** פועל עתיד בגוף שלישי אחרי שם הפועֵל: "מנהל העבודה יבדוק", "מבצע בניה יציג". */
 function hasActorFuture(text: string): boolean {
   const ws = words(text);
-  for (let i = 0; i < ws.length; i++) {
-    if (!isActor(ws[i])) continue;
+  return ws.some((w, i) => {
+    if (!isActor(w)) return false;
     // עד שלוש מילים של לוואי בין שם הפועֵל לפועל: "מנהל העבודה", "מבצע בניה".
-    for (let j = i + 1; j <= Math.min(i + 4, ws.length - 1); j++) {
-      const w = ws[j];
-      if (w === 'לא') continue;
-      if (NOT_OBLIGATION_VERBS.has(w) || NOT_VERB_WORDS.has(w)) break;
+    for (const next of ws.slice(i + 1, i + 5)) {
+      if (next === 'לא') continue;
+      if (NOT_OBLIGATION_VERBS.has(next) || NOT_VERB_WORDS.has(next)) return false;
       // רק ו'/ש'/ה' לפני הפועל. כל אות אחרת הופכת שמות עצם לפעלים ("ביצוע").
-      if (/^[ושה]?[ית][א-ת]{2,6}$/.test(w) && !isActor(w)) return true;
+      if (/^[ושה]?[ית][א-ת]{2,6}$/.test(next) && !isActor(next)) return true;
     }
-  }
-  return false;
+    return false;
+  });
 }
 
 const MORPHOLOGY_MARKERS: Marker[] = [
@@ -259,23 +258,27 @@ interface Frontmatter {
 
 export function parseFrontmatter(md: string): { fm: Frontmatter; bodyStartLine: number } {
   const lines = md.split('\n');
-  if (lines[0].trim() !== '---') throw new Error('frontmatter חסר');
+  if (lines[0]?.trim() !== '---') throw new Error('frontmatter חסר');
   const end = lines.indexOf('---', 1);
   if (end < 0) throw new Error('frontmatter לא נסגר');
   const raw: Record<string, string> = {};
   for (const l of lines.slice(1, end)) {
-    const m = l.match(/^(\w+):\s*(.*)$/);
-    if (m) raw[m[1]] = m[2].replace(/^'(.*)'$/, '$1').replace(/''/g, "'");
+    const [, key, value] = l.match(/^(\w+):\s*(.*)$/) ?? [];
+    if (key !== undefined && value !== undefined) {
+      raw[key] = value.replace(/^'(.*)'$/, '$1').replace(/''/g, "'");
+    }
   }
-  for (const k of ['scope_id', 'title', 'version_date', 'section_count']) {
-    if (!(k in raw)) throw new Error(`frontmatter: חסר ${k}`);
-  }
+  const field = (k: string): string => {
+    const v = raw[k];
+    if (v === undefined) throw new Error(`frontmatter: חסר ${k}`);
+    return v;
+  };
   return {
     fm: {
-      scope_id: raw.scope_id,
-      title: raw.title,
-      version_date: raw.version_date,
-      section_count: Number(raw.section_count),
+      scope_id: field('scope_id'),
+      title: field('title'),
+      version_date: field('version_date'),
+      section_count: Number(field('section_count')),
     },
     bodyStartLine: end + 1,
   };
@@ -290,7 +293,7 @@ const HEBREW_ORDINALS = [
 function nextHebrew(label: string | null): string | null {
   if (label === null) return 'א';
   const i = HEBREW_ORDINALS.indexOf(label);
-  return i >= 0 && i + 1 < HEBREW_ORDINALS.length ? HEBREW_ORDINALS[i + 1] : null;
+  return i >= 0 ? (HEBREW_ORDINALS[i + 1] ?? null) : null;
 }
 
 /** 1 = תת-תקנה (א), 2 = פסקה (1), 3 = פסקת משנה (א). */
@@ -317,8 +320,9 @@ function isLeadIn(text: string): boolean {
 }
 
 function sectionKey(s: string): [number, number] {
-  const m = s.match(/^(\d+)([א-ת]?)$/)!;
-  return [Number(m[1]), m[2] ? HEBREW_ORDINALS.indexOf(m[2]) + 1 : 0];
+  const [, num, letter] = s.match(/^(\d+)([א-ת]?)$/) ?? [];
+  if (num === undefined) throw new Error(`מספר תקנה לא תקין: ${s}`);
+  return [Number(num), letter ? HEBREW_ORDINALS.indexOf(letter) + 1 : 0];
 }
 
 /**
@@ -327,13 +331,16 @@ function sectionKey(s: string): [number, number] {
  * המספר הגבוה תואם, והסדר עולה ממש. תקנה מצוטטת בתוך תקנה אחרת שובר את הסדר.
  */
 export function assertSectionSequence(scope: string, seen: string[], declaredMax: number): void {
-  for (let i = 1; i < seen.length; i++) {
-    const [a, b] = [sectionKey(seen[i - 1]), sectionKey(seen[i])];
+  seen.forEach((cur, i) => {
+    const prev = seen[i - 1];
+    if (prev === undefined) return;
+    const [a, b] = [sectionKey(prev), sectionKey(cur)];
     if (b[0] < a[0] || (b[0] === a[0] && b[1] <= a[1])) {
-      throw new Error(`${scope}: תקנה ${seen[i]} אחרי ${seen[i - 1]} — הפענוח שגוי, לא לכתוב פלט.`);
+      throw new Error(`${scope}: תקנה ${cur} אחרי ${prev} — הפענוח שגוי, לא לכתוב פלט.`);
     }
-  }
-  const max = seen.length ? sectionKey(seen[seen.length - 1])[0] : 0;
+  });
+  const last = seen.at(-1);
+  const max = last === undefined ? 0 : sectionKey(last)[0];
   if (max !== declaredMax) {
     throw new Error(`${scope}: תקנה אחרונה ${max}, ב-frontmatter ${declaredMax} — הפענוח שגוי, לא לכתוב פלט.`);
   }
@@ -349,6 +356,7 @@ export function extractFromMarkdown(md: string, sourceFile: string, sites?: Site
   const candidates: Candidate[] = [];
   const sectionsSeen: string[] = [];
   const sectionsWithCandidates = new Set<string>();
+  const skippedSections = new Set<string>();
 
   let chapter: string | null = null;
   let heading: string | null = null;
@@ -359,8 +367,8 @@ export function extractFromMarkdown(md: string, sourceFile: string, sites?: Site
   let stack: (Node | undefined)[] = [];
   let lastLevel: 0 | Level = 0;
 
-  for (let i = bodyStartLine; i < lines.length; i++) {
-    const raw = lines[i];
+  for (const [i, raw] of lines.entries()) {
+    if (i < bodyStartLine) continue;
     const lineNo = i + 1;
     if (raw.startsWith('# ')) { prevWasHeading = false; continue; }
     if (raw.startsWith('## ')) {
@@ -376,16 +384,17 @@ export function extractFromMarkdown(md: string, sourceFile: string, sites?: Site
     let isSectionStart = false;
     // תחילת תקנה = "N. " מיד אחרי כותרת שוליים. בלי התנאי הזה, תקנה מצוטטת
     // בתוך תקנה אחרת (למשל "54." בתוך 3(ב)(3) ב-2.1) נספרת כתקנה חדשה.
-    const sm = prevWasHeading ? rest.match(SECTION_RE) : null;
+    const [, secNo, secRest] = (prevWasHeading ? rest.match(SECTION_RE) : null) ?? [];
     prevWasHeading = false;
-    if (sm) {
-      section = sm[1];
-      sectionsSeen.push(section);
-      rest = sm[2];
+    if (secNo !== undefined && secRest !== undefined) {
+      section = secNo;
+      sectionsSeen.push(secNo);
+      rest = secRest;
       stack = [];
       lastLevel = 0;
       isSectionStart = true;
       skipSection = heading !== null && NON_OBLIGATION_HEADINGS.test(heading);
+      if (skipSection) skippedSections.add(secNo);
     }
     if (section === null) continue; // דברי פתיחה לפני תקנה 1
 
@@ -394,12 +403,13 @@ export function extractFromMarkdown(md: string, sourceFile: string, sites?: Site
     let lm: RegExpMatchArray | null;
     while ((lm = rest.match(LABEL_RE))) {
       const label = lm[1];
+      if (label === undefined) break;
       const numeric = /^\d/.test(label);
       let level: Level;
       let ambiguous = false;
       if (numeric) {
         level = 2;
-      } else if (labels.length > 0 && labels[labels.length - 1].level === 2) {
+      } else if (labels.at(-1)?.level === 2) {
         level = 3; // "(1) (א)" באותה שורה
       } else if (labels.length > 0 || isSectionStart) {
         level = 1;
@@ -420,12 +430,13 @@ export function extractFromMarkdown(md: string, sourceFile: string, sites?: Site
 
     let level: 0 | Level;
     let continuation = false;
-    if (labels.length > 0) {
+    const lastLabel = labels.at(-1);
+    if (lastLabel) {
       for (const l of labels) {
         stack[l.level] = { level: l.level, label: l.label, text: '', isLeadIn: false, markers: [] };
         for (let k = l.level + 1; k <= 3; k++) stack[k] = undefined;
       }
-      level = labels[labels.length - 1].level;
+      level = lastLabel.level;
     } else if (isSectionStart) {
       level = 0;
     } else {
@@ -438,7 +449,7 @@ export function extractFromMarkdown(md: string, sourceFile: string, sites?: Site
     const own = findMarkers(text);
     const node: Node = {
       level,
-      label: labels.length ? labels[labels.length - 1].label : '',
+      label: lastLabel?.label ?? '',
       text: raw,
       isLeadIn: isLeadIn(text),
       markers: own.map((m) => m.id),
@@ -496,18 +507,6 @@ export function extractFromMarkdown(md: string, sourceFile: string, sites?: Site
     }
   }
 
-  const skippedSections = new Set<string>();
-  {
-    let h: string | null = null;
-    let prevH = false;
-    for (const l of lines.slice(bodyStartLine)) {
-      if (l.startsWith('## ')) { const t = l.slice(3).trim(); if (!/^פרק\s/.test(t)) h = t; prevH = true; continue; }
-      const m = prevH ? l.trim().match(SECTION_RE) : null;
-      prevH = false;
-      if (m && h !== null && NON_OBLIGATION_HEADINGS.test(h)) skippedSections.add(m[1]);
-    }
-  }
-
   return {
     scope,
     title: fm.title,
@@ -543,7 +542,7 @@ export function render(result: ScopeResult): string {
   const doc = {
     _note:
       'מועמדים שחולצו אוטומטית — לא סעיפי בדיקה. לא נכנס לייצור בלי ניסוח ואישור ממונה. ' +
-      'ראה docs/13-LIBRARY-BUILD.md. קובץ מחולל: node scripts/extract-obligations.ts',
+      'ראה docs/13-LIBRARY-BUILD.md. קובץ מחולל: pnpm library:extract',
     ...result,
   };
   return JSON.stringify(doc, null, 2) + '\n';

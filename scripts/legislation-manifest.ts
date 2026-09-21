@@ -491,7 +491,7 @@ export function fileNameFor(s: LegislationSource): string {
 
 /** Repo-relative output path for a source. */
 export function relPathFor(s: LegislationSource): string {
-  return `courses/safety-officer/sources/legislation/${s.chapterDir}/${fileNameFor(s)}`;
+  return `data/legislation/${s.chapterDir}/${fileNameFor(s)}`;
 }
 
 /** Validate the manifest at module-load (fail fast on a typo'd scope/dup slug/missing drive id). */

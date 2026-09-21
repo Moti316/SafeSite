@@ -48,17 +48,27 @@ scope ↔ PDF מחייב (Drive) ↔ נוסח עבודה .md ↔ URL נבו ↔ 
 
 ## איך מייבאים
 
-הקורפוס נבנה בסקריפטים שכבר קיימים ב-studi ואפשר להעתיק אותם כמעט כמו שהם:
+הקורפוס נבנה בסקריפטים של studi. הם הועתקו **כמות שהם, לאותו מבנה תיקיות** —
+כך הקבצים נשארים זהים ל-studi, וה-imports שלהם עובדים בלי שינוי:
 
-| קובץ ב-studi | תפקיד |
+| קובץ | תפקיד |
 |---|---|
 | `scripts/legislation-manifest.ts` | המניפסט — scope ↔ נבו ↔ קובץ ↔ PDF |
 | `scripts/fetch-legislation.ts` | הורדה מנבו וחילוץ verbatim |
 | `src/lib/import/verify-legislation.ts` | שער QA — חמש שכבות אימות |
 | `src/lib/import/strip-nevo-html.ts` | חילוץ לא-גנרטיבי |
+| `src/lib/db/constants/scope-refs.ts` | 57 פריטי ההיקף ו-`isValidScopeId` |
 
-**אל תכתוב את זה מחדש.** הסקריפטים כבר הועתקו ל-`scripts/`, והקורפוס
-כולו יושב ב-`data/legislation/`. התאם נתיבים והרץ.
+**השינוי היחיד מ-studi:** נתיב הקורפוס — `data/legislation/` במקום
+`courses/safety-officer/sources/legislation/` (`LEGISLATION_ROOT`, `relPathFor`).
+הטסטים של studi יושבים ב-`tests/unit/{import,db}/`.
+
+```bash
+pnpm legislation:verify      # L2–L5 על כל הנוסחים, בלי רשת
+pnpm legislation:fetch:dry   # תוכנית רענון מנבו, בלי כתיבה
+```
+
+**אל תכתוב את זה מחדש.**
 
 ### שכבות האימות שכבר מוטמעות
 

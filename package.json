@@ -1,0 +1,30 @@
+{
+  "name": "safesite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "מערכת דוחות לממונה בטיחות בעבודה — ספרייה שנגזרת מקורפוס החקיקה",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "legislation:fetch": "tsx scripts/fetch-legislation.ts --execute",
+    "legislation:fetch:dry": "tsx scripts/fetch-legislation.ts --dry-run",
+    "legislation:verify": "tsx scripts/fetch-legislation.ts --verify",
+    "legislation:index": "tsx scripts/fetch-legislation.ts --index",
+    "library:extract": "tsx scripts/extract-obligations.ts",
+    "library:check": "tsx scripts/extract-obligations.ts --check"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "dotenv": "16.6.1",
+    "tsx": "4.22.3",
+    "typescript": "5.9.3",
+    "vitest": "2.1.9"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.12.0"
+}

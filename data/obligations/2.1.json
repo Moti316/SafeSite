@@ -1,5 +1,5 @@
 {
-  "_note": "מועמדים שחולצו אוטומטית — לא סעיפי בדיקה. לא נכנס לייצור בלי ניסוח ואישור ממונה. ראה docs/13-LIBRARY-BUILD.md. קובץ מחולל: node scripts/extract-obligations.ts",
+  "_note": "מועמדים שחולצו אוטומטית — לא סעיפי בדיקה. לא נכנס לייצור בלי ניסוח ואישור ממונה. ראה docs/13-LIBRARY-BUILD.md. קובץ מחולל: pnpm library:extract",
   "scope": "2.1",
   "title": "תקנות הבטיחות בעבודה (עבודה בגובה), תשס\"ז-2007",
   "source_file": "data/legislation/2-pkudat-habetihut/2.1-avoda-begova-2007.md",

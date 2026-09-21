@@ -28,7 +28,7 @@
 תהליך מלא: [`docs/13-LIBRARY-BUILD.md`](docs/13-LIBRARY-BUILD.md) · אישור: [`docs/28-LIBRARY-REVIEW.md`](docs/28-LIBRARY-REVIEW.md)
 
 - [x] ✅ קורפוס החקיקה בריפו — 43 נוסחים ב-`data/legislation/`
-- [ ] 🔴 `S1.1` סקריפטי הייבוא והאימות — **הועתקו אבל לא רצים** (מבנה studi, `scope-refs` חסר, אין `package.json`)
+- [x] ✅ `S1.1` סקריפטי הייבוא והאימות רצים — מבנה studi, `scope-refs`, pnpm; 91 טסטים (54 מ-studi)
 - [x] ✅ `scripts/extract-obligations.ts` — איתור סעיפי חובה בנוסח (37 בדיקות)
 - [x] ✅ הרצה על 2.2 ו-2.1 — 728 מועמדים ב-`data/obligations/`; 7 תקנות בלי מועמד,
       כולן בוטלו, פטורים, חזקות או הסמכת מפקח ([D6](docs/18-DECISIONS.md#d6))

@@ -1,13 +1,13 @@
 /**
  * בדיקות ל-scripts/extract-obligations.ts.
  *
- * הרצה: node --test scripts/
+ * הרצה: pnpm test
  *
  * שלוש שכבות: פענוח המבנה, זיהוי סימני החובה, והערובה שהפלט בריפו נגזר
  * מהקורפוס הנוכחי ולא התיישן.
  */
 
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
@@ -20,7 +20,7 @@ import {
   findScopeFile,
   parseFrontmatter,
   render,
-} from './extract-obligations.ts';
+} from '../../../scripts/extract-obligations.ts';
 
 /** נוסח סינתטי. section_count נגזר מהגוף, כמו ב-fetch-legislation (maxSection). */
 function md(...body: string[]): string {
@@ -209,10 +209,12 @@ for (const scope of WAVE_1_SCOPES) {
 
   test(`${scope}: הפלט בריפו עדכני מול הקורפוס`, () => {
     const committed = readFileSync(`data/obligations/${scope}.json`, 'utf8');
+    const [, sourceFile] = committed.match(/"source_file": "(.*?)"/) ?? [];
+    assert.ok(sourceFile, 'source_file חסר בפלט');
     assert.equal(
-      render(extractFromMarkdown(source, committed.match(/"source_file": "(.*?)"/)![1])),
+      render(extractFromMarkdown(source, sourceFile)),
       committed,
-      'הרץ node scripts/extract-obligations.ts',
+      'הרץ pnpm library:extract',
     );
   });
 }
