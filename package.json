@@ -13,7 +13,9 @@
     "legislation:verify": "tsx scripts/fetch-legislation.ts --verify",
     "legislation:index": "tsx scripts/fetch-legislation.ts --index",
     "library:extract": "tsx scripts/extract-obligations.ts",
-    "library:check": "tsx scripts/extract-obligations.ts --check"
+    "library:check": "tsx scripts/extract-obligations.ts --check",
+    "corpus:check": "tsx scripts/corpus-hashes.ts --check",
+    "corpus:hash": "tsx scripts/corpus-hashes.ts --write"
   },
   "devDependencies": {
     "@types/node": "22.19.19",
