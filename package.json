@@ -19,7 +19,9 @@
     "library:drafts": "tsx scripts/validate-drafts.ts",
     "library:review": "tsx scripts/build-review-page.ts",
     "library:apply-review": "tsx scripts/apply-review.ts",
-    "corpus:verify": "tsx scripts/verify-corpus.ts"
+    "corpus:verify": "tsx scripts/verify-corpus.ts",
+    "library:brief": "tsx scripts/build-verification-brief.ts",
+    "library:import-verification": "tsx scripts/import-verification.ts"
   },
   "devDependencies": {
     "@types/node": "22.19.19",

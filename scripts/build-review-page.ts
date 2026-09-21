@@ -7,11 +7,12 @@
  * הרצה: pnpm library:review <batch>    ← build/review/<batch>.html
  */
 
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { DraftBatch } from '../src/lib/library/drafts.ts';
+import type { VerifiedItem, Verification } from '../src/lib/library/verification.ts';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const TEMPLATE = join(REPO_ROOT, 'scripts', 'review-page', 'template.html');
@@ -28,9 +29,28 @@ export function embedJson(value: unknown): string {
     .replace(/\u2029/g, '\\u2029');
 }
 
-export function renderReviewPage(batch: DraftBatch, template: string = readFileSync(TEMPLATE, 'utf8')): string {
+/** תוצאות האימות האחרונות לסעיפי האצווה, אם יש. */
+export function latestVerification(batch: DraftBatch): { verified_on: string; items: Record<string, VerifiedItem> } | null {
+  const dir = join(REPO_ROOT, 'data', 'verification');
+  if (!existsSync(dir)) return null;
+  const files = readdirSync(dir).filter((f) => f.endsWith('.json')).sort();
+  const ids = new Set(batch.items.map((i) => i.id));
+  for (const f of files.reverse()) {
+    const v = JSON.parse(readFileSync(join(dir, f), 'utf8')) as Verification;
+    const mine = v.items.filter((i) => ids.has(i.id));
+    if (mine.length > 0) return { verified_on: v.verified_on, items: Object.fromEntries(mine.map((i) => [i.id, i])) };
+  }
+  return null;
+}
+
+export function renderReviewPage(
+  batch: DraftBatch,
+  template: string = readFileSync(TEMPLATE, 'utf8'),
+  verification: ReturnType<typeof latestVerification> = null,
+): string {
   if (!template.includes(PLACEHOLDER)) throw new Error('בתבנית חסר מקום לנתוני האצווה');
-  return template.replace(PLACEHOLDER, () => embedJson(batch));
+  const data = verification ? { ...batch, verification } : batch;
+  return template.replace(PLACEHOLDER, () => embedJson(data));
 }
 
 function main(argv: string[]): number {
@@ -42,7 +62,7 @@ function main(argv: string[]): number {
   const batch = JSON.parse(readFileSync(join(REPO_ROOT, 'data', 'drafts', `${name}.json`), 'utf8')) as DraftBatch;
   const out = join(REPO_ROOT, 'build', 'review', `${name}.html`);
   mkdirSync(dirname(out), { recursive: true });
-  writeFileSync(out, renderReviewPage(batch), 'utf8');
+  writeFileSync(out, renderReviewPage(batch, undefined, latestVerification(batch)), 'utf8');
   process.stdout.write(`${out}\n`);
   return 0;
 }

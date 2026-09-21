@@ -84,6 +84,13 @@
   .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 20px 0; flex-wrap: wrap; }
   .cite { background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: 14px; border-radius: 999px; padding: 3px 12px; }
   .id { font-size: 12px; color: var(--dim); }
+  .head-end { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .vbadge { font-size: 13px; font-weight: 600; border-radius: 999px; padding: 2px 10px; }
+  .vbadge[data-v="ok"] { background: var(--ok-soft); color: var(--ok); }
+  .vbadge[data-v="flag"] { background: var(--change-soft); color: var(--change); }
+  .vbadge[data-v="bad"] { background: var(--bad-soft); color: var(--bad); }
+  .vnote { background: var(--bad-soft); border-radius: var(--r-sm); padding: 10px 14px; font-size: 15px; margin: 0; }
+  .vnote b { color: var(--bad); }
   .card-body { padding: 14px 20px 20px; display: grid; gap: 14px; }
   .slip { margin: 0; background: var(--slip); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 14px 16px; }
   .slip-label { font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--dim); margin: 0 0 6px; }
@@ -161,6 +168,7 @@
   <ul class="tally" id="tally" aria-live="polite"></ul>
 
   <div class="tabs" role="group" aria-label="סינון הסעיפים">
+    <button type="button" data-filter="flagged" aria-pressed="false" id="tab-flagged" hidden>סומנו לבדיקה</button>
     <button type="button" data-filter="open" aria-pressed="true">ממתינים</button>
     <button type="button" data-filter="done" aria-pressed="false">הוחלטו</button>
     <button type="button" data-filter="all" aria-pressed="false">הכל</button>
@@ -197,6 +205,11 @@
     draft: { label: 'דורש ניסוח', ic: '✎' },
   };
   const LOCAL_ID = 'local';
+  // אימות מסוכן דפדפן — אינו אישור. רק מסמן על מה לעבור (docs/28).
+  const verification = batch.verification || null;
+  const vOf = (id) => verification && verification.items[id];
+  const isFlagged = (id) => !verification || !vOf(id) || vOf(id).verdict !== 'תואם';
+  const VKIND = { 'תואם': 'ok', 'דורש ממונה': 'flag', 'סטייה': 'bad', 'לא נמצא': 'bad' };
   const STORE_KEY = 'review:' + batch.batch;
 
   // שני מצבים: דף ב-claude.ai (מסד נתונים + זהות חשבון) או קובץ מקומי (דפדפן + ייצוא).
@@ -427,10 +440,15 @@
           return v === 'approve' ? base : { ...base, note: val };
         }),
     );
+    const v = vOf(key);
+    const badge = v ? el('span', { class: 'vbadge', 'data-v': VKIND[v.verdict] || 'flag', text: (v.verdict === 'תואם' ? '✓ אומת מול נבו' : '▲ ' + v.verdict) }) : null;
+    if (v && v.verdict !== 'תואם' && v.comment) {
+      body.prepend(el('p', { class: 'vnote' }, el('b', { text: 'ממצא האימות: ' }), v.comment + (v.found_text ? ' — בנבו: "' + v.found_text + '"' : '')));
+    }
     card.append(
       el('div', { class: 'card-head' },
         el('span', { class: 'cite', text: item.citation.section }),
-        el('span', { class: 'id mono', text: item.id })),
+        el('span', { class: 'head-end' }, badge, el('span', { class: 'id mono', text: item.id }))),
       body,
     );
     return card;
@@ -458,7 +476,9 @@
   function renderAll() {
     renderHeader();
     renderGate();
-    const show = (key) => state.filter === 'all' || (state.filter === 'open' ? !mine(key) : !!mine(key));
+    const show = (key) => state.filter === 'all'
+      || (state.filter === 'flagged' ? (!key.startsWith('nd-') && isFlagged(key) && !mine(key))
+      : state.filter === 'open' ? !mine(key) : !!mine(key));
     const items = batch.items.filter((i) => show(i.id)).map(renderItem);
     $('#items').replaceChildren(...(items.length ? items : [el('p', { class: 'empty', text: state.filter === 'open' ? 'אין סעיפים ממתינים.' : 'עוד לא הוחלט על אף סעיף.' })]));
     const nds = batch.not_drafted.map((nd, n) => ({ nd, n })).filter(({ n }) => show('nd-' + n));
@@ -489,6 +509,14 @@
       for (const o of document.querySelectorAll('[data-filter]')) o.setAttribute('aria-pressed', String(o === b));
       renderAll();
     });
+  }
+
+  if (verification) {
+    const tab = document.getElementById('tab-flagged');
+    tab.hidden = false;
+    tab.textContent = 'סומנו לבדיקה (' + batch.items.filter((i) => isFlagged(i.id)).length + ')';
+    state.filter = 'flagged';
+    for (const o of document.querySelectorAll('[data-filter]')) o.setAttribute('aria-pressed', String(o.dataset.filter === 'flagged'));
   }
 
   function startLocal() {
