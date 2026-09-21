@@ -1,0 +1,521 @@
+{
+  "_note": "טיוטה — לא בייצור. נוסחה אוטומטית ודורשת אישור ממונה סעיף-סעיף. ראה docs/28-LIBRARY-REVIEW.md.",
+  "batch": "2.2-work-surfaces",
+  "scope": "2.2",
+  "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+  "source_sha256": "7d4f79ea4982707f37e6c7217172383fa5a4fe425b842184b7e80fb4bd850fde",
+  "drafted_by": "claude-opus-5",
+  "drafted_on": "2026-09-21",
+  "covers": [
+    "8",
+    "9",
+    "10",
+    "11",
+    "11א",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "category": {
+    "id": "surface",
+    "label": "משטחי עבודה, גידור ומדרכות מעבר",
+    "applies_to": [
+      "construction"
+    ]
+  },
+  "items": [
+    {
+      "id": "surface-001",
+      "category": "surface",
+      "text": "האם משטח העבודה ומדרכת המעבר מותקנים באופן המונע את התמוטטותם או את שבירתם?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 8(א)"
+      },
+      "source_excerpt": "כל משטח עבודה או מדרכת מעבר יותקנו כיאות למטרה לה הם מיועדים ובאופן המונע התמוטטותם, או שבירתם המלאה או החלקית",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:8(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-002",
+      "category": "surface",
+      "text": "האם משטח העבודה ומדרכת המעבר מונעים נפילת אדם או חפץ מהם?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 8(א)"
+      },
+      "source_excerpt": "או נפילת אדם או חפץ מהם",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:8(א)"
+      ],
+      "drafting_note": "הדרישות המפורטות לגידור — תקנות 9 ו-10, בהמשך האצווה.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-003",
+      "category": "surface",
+      "text": "האם הסמוכות של משטח העבודה ומדרכת המעבר עשויות חומר מתאים וללא פגם?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 8(ב)"
+      },
+      "source_excerpt": "הסמוכות למשטח העבודה ולמדרכת מעבר יהיו עשויים חומר מתאים ללא פגם",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:8(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-004",
+      "category": "surface",
+      "text": "האם אין לבנים, בלוקים, חביות או צינורות שוכבים המשמשים כסמוכות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 8(ב)"
+      },
+      "source_excerpt": "לא ישמשו לבנים, בלוקים, חביות או צינורות שוכבים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:8(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-005",
+      "category": "surface",
+      "text": "האם משטח עבודה או מדרכת מעבר שמהם אפשר ליפול לעומק של יותר מ-2 מטרים גדורים באזן יד ובאזן תיכון?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 9(א)(1)"
+      },
+      "source_excerpt": "אזן יד ואזן תיכון מתאימים ובחוזק נאות למניעת נפילת אדם",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:9(א)",
+        "2.2:9(א)(1)"
+      ],
+      "drafting_note": "אין חובת אזן תיכון כשהפתח האנכי מתחת למעקה אינו עולה על 50 סנטימטרים — תקנה 9(ב).",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-006",
+      "category": "surface",
+      "text": "באותם משטחים — האם הותקנו לוחות רגליים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 9(א)(2)"
+      },
+      "source_excerpt": "לוחות רגליים בגובה מתאים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:9(א)(2)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-007",
+      "category": "surface",
+      "text": "האם אזן היד נמצא בגובה של 90 סנטימטרים עד 1.15 מטרים מעל הרצפה?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(א)"
+      },
+      "source_excerpt": "הוא ייקבע מצדם הפנימי של הזקפים בגובה של לא פחות מ-90 סנטימטרים ולא יותר מ-1.15 מטרים מעל רצפת משטח העבודה או מדרכת המעבר",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(א)",
+        "2.2:10(ב)"
+      ],
+      "drafting_note": "אותו טווח חל על אזן יד ממתכת — תקנה 10(ב).",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-008",
+      "category": "surface",
+      "text": "באזן יד מעץ, כשהמרחק בין הזקפים עולה על 2 מטרים — האם חתך הרוחב שלו 30 סנטימטרים רבועים לפחות (בפיגום: 50)?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(א)"
+      },
+      "source_excerpt": "אזן יד, העשוי עץ, יהיה בעל חתך רוחב של 30 סנטימטרים רבועים לפחות, אם המרחק בין הזקפים עולה על שני מטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(א)"
+      ],
+      "drafting_note": "דורש מדידה. דרישת 50 סנטימטרים רבועים בפיגום מופיעה באותה תקנה.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-009",
+      "category": "surface",
+      "text": "האם האזן התיכון נמצא בגובה של 45 עד 50 סנטימטרים מעל המשטח?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(ג)"
+      },
+      "source_excerpt": "האזן התיכון ייקבע בגובה של 45 עד 50 סנטימטרים מעל למשטח העבודה או מדרכת המעבר",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-010",
+      "category": "surface",
+      "text": "האם אזן היד והאזן התיכון עשויים חומר קשיח, ולא חבל, כבל או שרשרת?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(ד)"
+      },
+      "source_excerpt": "להתקנת אזן יד או אזן תיכון לא ישתמשו בחבל, כבל או שרשרת אלא אם הנסיבות אינן מאפשרות התקנה כאמור מחומר קשיח",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(ד)"
+      ],
+      "drafting_note": "חריג בנוסח: כשהנסיבות אינן מאפשרות חומר קשיח.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-011",
+      "category": "surface",
+      "text": "האם השפה העליונה של לוחות הרגליים בגובה 15 סנטימטרים לפחות מעל הרצפה?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(ה)"
+      },
+      "source_excerpt": "גובה שפתם העליונה, מעל פני רצפת המשטח או המדרכה, לא יפחת מ-15 סנטימטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(ה)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-012",
+      "category": "surface",
+      "text": "האם לוחות הרגליים מותקנים בצד הפנימי של הזקפים, צמודים זה לזה ולרצפה?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(ה)"
+      },
+      "source_excerpt": "לוחות רגליים ייקבעו בצד הפנימי של הזקפים ויהיו סמוכים ככל האפשר זה לזה ולרצפה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(ה)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-013",
+      "category": "surface",
+      "text": "האם המרחק בין זקפי המעקה אינו עולה על 3 מטרים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(ו)"
+      },
+      "source_excerpt": "והמרחקים ביניהם לא יעלו על 3 מטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(ו)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-014",
+      "category": "surface",
+      "text": "בזקפים מעץ — האם החתך שלהם 5x10 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(ו)"
+      },
+      "source_excerpt": "וכשהם עשויים עץ יהיו בעלי חתך רוחב במידות 5x10 סנטימטרים לפחות",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(ו)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-015",
+      "category": "surface",
+      "text": "האם אזן היד והאזן התיכון מחוברים לזקפים כך שאינם יכולים להיעתק ממקומם?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 10(ז)"
+      },
+      "source_excerpt": "אזן היד והאזן התיכון יחוברו אל הזקפים באופן שיימנע עיתוקם המקרי ממקומם",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:10(ז)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-016",
+      "category": "surface",
+      "text": "האם אזני היד, האזנים התיכונים ולוחות הרגליים שלמים ותקינים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 11(א)"
+      },
+      "source_excerpt": "אזן יד, אזן תיכון ולוחות רגליים יהיו במצב תקין",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:11(א)"
+      ],
+      "drafting_note": "מותר להסיר אותם זמנית להעברת חומר, רק לזמן הדרוש ועם אמצעים למניעת נפילה — תקנה 11(ב).",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-017",
+      "category": "surface",
+      "text": "האם יש דרך גישה בטוחה לכל מקום שבו עומדים, עובדים או עוברים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 12"
+      },
+      "source_excerpt": "בכל מקום שאדם צריך לעמוד בו, לעבוד או לעבור בו יותקנו דרכי גישה בטוחות",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:12"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-018",
+      "category": "surface",
+      "text": "האם רוחב מדרכת המעבר 60 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 13(א)"
+      },
+      "source_excerpt": "ורחבה יהיה לפחות 60 סנטימטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:13(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-019",
+      "category": "surface",
+      "text": "האם לוחות מדרכת המעבר צמודים ומחוברים זה לזה כך שאינם יכולים לזוז?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 13(א)"
+      },
+      "source_excerpt": "מדרכת מעבר תהיה עשויה לוחות סמוכים ומחוברים זה לזה באופן המונע עיתוקם מהמקום",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:13(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-020",
+      "category": "surface",
+      "text": "האם סמוכות הרוחב של מדרכת המעבר ישרות, אופקיות ומחוברות היטב לאזנים ולזקפים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 13(ב)(1)"
+      },
+      "source_excerpt": "סמוכות הרוחב של מדרכת המעבר יהיו ישרות, יותקנו במאוזן ויחוברו היטב לאזנים ולזקפים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:13(ב)(1)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-021",
+      "category": "surface",
+      "text": "בסמוכות רוחב מעץ — האם שטח החתך 50 סנטימטרים רבועים לפחות, והמידה הצרה 4.5 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 13(ב)(2)"
+      },
+      "source_excerpt": "סמוכת רוחב העשויה עץ תהיה בעלת שטח חתך של 50 סנטימטרים רבועיים לפחות והמידה הצרה שלה לא תפחת מ-4.5 סנטימטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:13(ב)(2)"
+      ],
+      "drafting_note": "דורש מדידה.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-022",
+      "category": "surface",
+      "text": "האם המרחק בין סמוכות הרוחב של מדרכת המעבר אינו עולה על 2 מטרים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 13(ב)(4)"
+      },
+      "source_excerpt": "אך לא יעלה על 2 מטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:13(ב)(4)"
+      ],
+      "drafting_note": "התקנה דורשת גם התאמה לעומס המרבי — זה חישוב, לא תצפית. הבדיקה מכסה רק את המקסימום.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-023",
+      "category": "surface",
+      "text": "האם שיפוע מדרכת המעבר אינו תלול מיחס של 1 אנכי ל-1.5 אופקי?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 14(א)"
+      },
+      "source_excerpt": "השיפוע של מדרכת מעבר לא יעלה על היחס של 1 אנכי ל-1.5 אפקי",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:14(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-024",
+      "category": "surface",
+      "text": "במדרכה ששיפועה תלול מ-1 אנכי ל-4 אופקי — האם הותקנו שלבי דריכה במרווחים של 30 עד 35 סנטימטרים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 14(ב)"
+      },
+      "source_excerpt": "יותקנו שלבי דריכה לאורך המדרכה ברווחים שווים של 30 עד 35 סנטימטרים לכל רוחב המדרכה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:14(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "surface-025",
+      "category": "surface",
+      "text": "האם משטחי העבודה, המעברים והרצפה נקיים ממסמרים בולטים, חוטי קשירה ומכשולים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 15"
+      },
+      "source_excerpt": "יהיו נקיים ממסמרים בולטים, מחוטי קשירה ומכל עצם בולט או מכשול אחר שבו עלול להיתקל אדם",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:15"
+      ],
+      "drafting_note": "חל על כל מקום עד לגובה 2 מטרים שבו נמצא או עובר אדם.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    }
+  ],
+  "not_drafted": [
+    {
+      "candidate": "2.2:13(ב)(3)",
+      "reason": "חוזק שווה ערך של סמוכה ממתכת אינו ניתן לקביעה בתצפית, ונדרש לשם כך מסמך יצרן או חישוב. הצעה: לא לנסח בדיקה נפרדת."
+    }
+  ]
+}
