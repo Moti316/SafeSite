@@ -1,0 +1,3 @@
+# הקורפוס, הציטוטים וה-hash שלהם תלויים בסופי שורה יציבים.
+# בלי זה, checkout על Windows עם autocrlf הופך אותם ל-CRLF.
+* text=auto eol=lf
