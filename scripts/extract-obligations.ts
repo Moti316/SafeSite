@@ -175,6 +175,18 @@ const MORPHOLOGY_MARKERS: Marker[] = [
   { id: 'עתיד סביל', test: (t) => words(t).some(isPassiveFuture), source: 'morphology' },
   { id: 'עתיד עם ו׳ אמצעית', test: (t) => words(t).some(isMiddleVavFuture), source: 'morphology' },
   {
+    // רבים סתמי, בלי נושא: "ירחיקוהו מאתר הבניה" (2.2, 19(ב)), "ישתמשו", "יתקינו".
+    id: 'עתיד רבים סתמי',
+    test: (t) =>
+      words(t).some(
+        (w) =>
+          /^י[א-ת]{3,5}(?:ו|והו|וה)$/.test(w) &&
+          !NOT_OBLIGATION_VERBS.has(w) &&
+          !NOT_VERB_WORDS.has(w),
+      ),
+    source: 'morphology',
+  },
+  {
     id: 'יש ל',
     test: (t) => new RegExp(`(?<![${HEB}])יש ל[${HEB}]`).test(t),
     source: 'morphology',
