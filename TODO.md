@@ -21,7 +21,7 @@
 - [x] ✅ `S0.1` דחיפת הקומיטים המקומיים
 - [x] ✅ `S0.2` מסמכי ביצוע: 26, 27, 28, 29, `docs/design/`; אינדקס; מזהים ב-TODO
 - [x] ✅ `S0.3` ניקוי מסמכים שהתיישנו (20: Q4 Q5 Q6 · 08 · 01 · 21)
-- [ ] ⬜ `S0.4` `docs/CLAUDE-PROJECT-CONTEXT.md` לפרויקט ב-claude.ai
+- [x] ✅ `S0.4` `docs/CLAUDE-PROJECT-CONTEXT.md` לפרויקט ב-claude.ai
 
 ## שלב 1 · גל ראשון של הספרייה
 
