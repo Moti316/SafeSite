@@ -64,3 +64,24 @@ flowchart LR
 
 כל החלטה נשמרת עם: מי, מתי, מה הוחלט, והנוסח לפני ואחרי. ההיסטוריה נשארת
 ב-git דרך קובצי `data/drafts/`, כך שאפשר לשחזר למה סעיף נראה כמו שהוא נראה.
+
+## איך מריצים
+
+```bash
+pnpm library:review 2.2-scaffolds-general        # מחולל את הדף ל-build/review/
+pnpm library:apply-review 2.2-scaffolds-general <export.json> [--approvals=2]
+pnpm library:drafts                              # חייב לעבור אחרי ההחלה
+```
+
+`<export.json>` הוא ייצוא של מסד הנתונים של הדף — `{decisions, reviewers}` —
+ש-Claude קורא אחרי שהסקירה הסתיימה. `apply-review` לא כותב דבר אם התוצאה
+לא עוברת את המאמת.
+
+## דפי סקירה פעילים
+
+| אצווה | דף | סטטוס |
+|---|---|---|
+| 1 · פיגומים, 2.2 תקנות 16–33 | [Artifact](https://claude.ai/artifact/X2mr1azuq87vpbAHUL6jWk) | 👤 ממתין לסקירה |
+
+**הרשאות:** רק מי שיש לו "Can edit" על הדף יכול לשמור החלטות. מאשר נוסף
+(X4) צריך לקבל הרשאה כזו מתפריט השיתוף.

@@ -33,6 +33,14 @@ export interface NotDrafted {
   reason: string;
 }
 
+/** סעיף שהממונה דחה. נשמר כדי שדוח הכיסוי יראה מה נדחה ולמה. */
+export interface RejectedItem {
+  item: DraftItem;
+  reason: string;
+  reviewed_by: string;
+  reviewed_on: string;
+}
+
 export interface DraftBatch {
   batch: string;
   scope: string;
@@ -47,6 +55,8 @@ export interface DraftBatch {
   category: { id: string; label: string; applies_to: Site[] };
   items: DraftItem[];
   not_drafted: NotDrafted[];
+  /** סעיפים שנדחו בסקירה. המועמדים שלהם נחשבים מכוסים — ההחלטה עליהם התקבלה. */
+  rejected?: RejectedItem[];
 }
 
 /** מה שהמאמת צריך לדעת על מועמד — תת-קבוצה של Candidate ב-extract-obligations. */
@@ -128,6 +138,17 @@ export function validateBatch(b: DraftBatch, ctx: DraftContext): string[] {
     const hasBy = item.reviewed_by !== null && item.reviewed_by.trim() !== '';
     const hasOn = item.reviewed_on !== null && ISO_DATE.test(item.reviewed_on);
     if (hasBy !== hasOn) err(at, 'reviewed_by ו-reviewed_on — שניהם או אף אחד');
+  }
+
+  for (const r of b.rejected ?? []) {
+    const at = `נדחה ${r.item.id}`;
+    if (!r.reason.trim()) err(at, 'נימוק דחייה חסר');
+    if (!r.reviewed_by.trim() || !ISO_DATE.test(r.reviewed_on)) err(at, 'דחייה בלי מאשר ותאריך');
+    if (seenIds.has(r.item.id)) err(at, 'מזהה קיים גם בסעיפים הפעילים');
+    for (const id of r.item.derived_from) {
+      if (!ctx.candidates.has(id)) err(at, `מועמד לא קיים: ${id}`);
+      derivedAll.add(id);
+    }
   }
 
   const notDrafted = new Set<string>();

@@ -1,0 +1,389 @@
+<title>סקירת ספריית הבדיקה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  /* טוקנים לפי docs/05-DESIGN-SYSTEM.md — כהה כברירת מחדל, צבע רק למצב. */
+  :root {
+    --bg: #0f1113; --surface: #1a1d21; --surface-2: #24282d; --border: #363b42;
+    --text: #f2f4f6; --text-dim: #a8b0b8;
+    --ok: #4a9d6e; --warn: #d4a017; --bad: #d93025; --focus: #8ab4f8;
+    --r-sm: 6px; --r-md: 12px;
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #ffffff; --surface: #f4f6f8; --surface-2: #e8ecef; --border: #c9d0d6;
+      --text: #0f1113; --text-dim: #4a535c;
+      --ok: #2e7550; --warn: #8a6500; --bad: #b3261e; --focus: #1a5fd0;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #ffffff; --surface: #f4f6f8; --surface-2: #e8ecef; --border: #c9d0d6;
+    --text: #0f1113; --text-dim: #4a535c;
+    --ok: #2e7550; --warn: #8a6500; --bad: #b3261e; --focus: #1a5fd0;
+    color-scheme: light;
+  }
+  body { background: var(--bg); color: var(--text); }
+  .app {
+    font-family: "IBM Plex Sans Hebrew", "Noto Sans Hebrew", "Arial Hebrew", Arial, sans-serif;
+    font-size: 17px; line-height: 1.6;
+    max-width: 760px; margin-inline: auto; padding-inline: 16px; padding-block: 0 var(--s6);
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  h1 { font-size: 24px; line-height: 1.3; margin: 0; text-wrap: balance; }
+  h2 { font-size: 19px; margin: var(--s6) 0 var(--s3); text-wrap: balance; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .bar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    padding-block: var(--s3); margin-bottom: var(--s4);
+    display: grid; gap: var(--s2);
+  }
+  .meta { color: var(--text-dim); font-size: 14px; margin: 0; }
+  .progress { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font-size: 14px; color: var(--text-dim); }
+  .progress b { color: var(--text); }
+  .track { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .track span { display: block; height: 100%; background: var(--text-dim); width: 0; }
+  .filters { display: flex; gap: var(--s2); flex-wrap: wrap; }
+
+  button, .chip {
+    font: inherit; font-size: 16px; min-height: 48px; padding-inline: var(--s4);
+    border-radius: var(--r-sm); border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .primary { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 600; }
+
+  .notice {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+    padding: var(--s4); display: grid; gap: var(--s3);
+  }
+  .notice p { margin: 0; }
+  .fields { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  label { display: grid; gap: var(--s1); font-size: 14px; color: var(--text-dim); }
+  input, textarea {
+    font: inherit; font-size: 17px; color: var(--text); background: var(--bg);
+    border: 1px solid var(--border); border-radius: var(--r-sm); padding: var(--s3); min-height: 48px;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+
+  .list { display: grid; gap: var(--s4); }
+  .item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+    padding: var(--s4); display: grid; gap: var(--s3);
+  }
+  .item[data-state="approve"] { border-color: var(--ok); }
+  .item[data-state="reject"] { border-color: var(--bad); }
+  .item[data-state="rewrite"], .item[data-state="split"], .item[data-state="conflict"] { border-color: var(--warn); }
+  .head { display: flex; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; align-items: baseline; }
+  .cite { font-size: 14px; color: var(--text-dim); }
+  .id { font-size: 13px; color: var(--text-dim); }
+  .law {
+    margin: 0; padding: var(--s3) var(--s4); background: var(--surface-2);
+    border-inline-start: 3px solid var(--text-dim); border-radius: var(--r-sm);
+    font-size: 16px;
+  }
+  .law small { display: block; font-size: 13px; color: var(--text-dim); margin-top: var(--s1); }
+  .question { font-size: 19px; font-weight: 600; margin: 0; }
+  .note { font-size: 15px; color: var(--text-dim); margin: 0; }
+  .note::before { content: "הערת ניסוח · "; font-weight: 600; }
+
+  .decide { border: 0; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+  .decide legend { font-size: 14px; color: var(--text-dim); margin-bottom: var(--s1); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--s2); }
+  .options input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .options label {
+    min-height: 48px; display: flex; align-items: center; justify-content: center; gap: var(--s2);
+    border: 1px solid var(--border); border-radius: var(--r-sm); color: var(--text); font-size: 16px;
+    cursor: pointer; background: var(--bg);
+  }
+  .options input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .options input:checked + label { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 600; }
+  .actions { display: flex; gap: var(--s2); flex-wrap: wrap; align-items: center; }
+  .status { font-size: 15px; margin: 0; }
+  .status[data-kind="approve"] { color: var(--ok); }
+  .status[data-kind="reject"] { color: var(--bad); }
+  .status[data-kind="rewrite"], .status[data-kind="split"], .status[data-kind="conflict"] { color: var(--warn); }
+  .error { color: var(--bad); font-size: 15px; margin: 0; }
+  @media (prefers-reduced-motion: no-preference) { .track span { transition: width .3s ease; } }
+</style>
+
+<div class="app" dir="rtl" lang="he">
+  <header class="bar">
+    <h1 id="title">סקירת טיוטה</h1>
+    <p class="meta" id="meta"></p>
+    <div class="track" aria-hidden="true"><span id="track"></span></div>
+    <p class="progress" id="progress" aria-live="polite"></p>
+    <div class="filters" role="group" aria-label="סינון">
+      <button type="button" class="chip" data-filter="open" aria-pressed="true">ממתינים</button>
+      <button type="button" class="chip" data-filter="done" aria-pressed="false">הוחלטו</button>
+      <button type="button" class="chip" data-filter="all" aria-pressed="false">הכל</button>
+    </div>
+  </header>
+
+  <section id="gate" class="notice" hidden></section>
+  <div id="items" class="list"></div>
+
+  <h2 id="nd-title">הצעות שלא לנסח בדיקה</h2>
+  <p class="meta">מועמדי חובה שהוצע להשאיר מחוץ לספרייה. גם כאן ההחלטה שלך.</p>
+  <div id="not-drafted" class="list"></div>
+</div>
+
+<script id="batch-data" type="application/json">/*__BATCH__*/</script>
+<script>
+(() => {
+  const batch = JSON.parse(document.getElementById('batch-data').textContent);
+  const LABELS = { approve: 'מאשר', rewrite: 'מנסח מחדש', split: 'מפצל', reject: 'דוחה' };
+  const ND_LABELS = { agree: 'מסכים — לא לנסח', draft: 'דורש ניסוח' };
+  // כל ה"מונים" נגזרים מההחלטות בזמן הרינדור (הכלל השלישי ב-CLAUDE.md).
+  const state = { db: null, me: null, reviewer: null, decisions: new Map(), filter: 'open', writable: true,
+    // בחירה וטקסט שעוד לא נשמרו — שורדים רינדור מחדש כשמגיעה החלטה של מישהו אחר.
+    pending: new Map() };
+
+  const $ = (s, el = document) => el.querySelector(s);
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'text') n.textContent = v; else if (v !== false && v != null) n.setAttribute(k, v === true ? '' : v);
+    }
+    for (const k of kids) if (k) n.append(k);
+    return n;
+  };
+  const safeId = (s) => s.replace(/[^A-Za-z0-9_-]/g, '_');
+
+  function myDecision(key) {
+    return state.me ? state.decisions.get(key + '~' + state.me) : undefined;
+  }
+  function allFor(key) {
+    return [...state.decisions.entries()].filter(([k]) => k.startsWith(key + '~')).map(([, v]) => v);
+  }
+  function summary(key) {
+    const ds = allFor(key);
+    if (ds.length === 0) return null;
+    const kinds = new Set(ds.map((d) => d.decision));
+    return kinds.size > 1 ? 'conflict' : ds[0].decision;
+  }
+
+  function renderHeader() {
+    $('#title').textContent = 'סקירת טיוטה · ' + batch.category.label;
+    $('#meta').textContent = batch.law + ' · ' + batch.items.length + ' בדיקות · נוסח ב-' + batch.drafted_on + ' (' + batch.drafted_by + ')';
+    const keys = [...batch.items.map((i) => i.id), ...batch.not_drafted.map((_, n) => 'nd-' + n)];
+    const done = keys.filter((k) => myDecision(k)).length;
+    const counts = { approve: 0, rewrite: 0, split: 0, reject: 0 };
+    for (const i of batch.items) { const d = myDecision(i.id); if (d) counts[d.decision]++; }
+    $('#track').style.width = (keys.length ? (100 * done / keys.length) : 0) + '%';
+    const p = $('#progress');
+    p.replaceChildren(
+      el('span', {}, el('b', { text: String(done) }), ' מתוך ' + keys.length + ' הוחלטו'),
+      el('span', { text: 'אושרו ' + counts.approve }),
+      el('span', { text: 'נוסחו מחדש ' + counts.rewrite }),
+      el('span', { text: 'פוצלו ' + counts.split }),
+      el('span', { text: 'נדחו ' + counts.reject }),
+    );
+  }
+
+  function renderGate() {
+    const gate = $('#gate');
+    if (!state.db) {
+      gate.hidden = false;
+      gate.replaceChildren(el('p', { text: 'שמירת ההחלטות אינה זמינה בתצוגה הזו. אפשר לקרוא את הטיוטות, אבל לא לאשר.' }));
+      return;
+    }
+    if (!state.me) {
+      gate.hidden = false;
+      gate.replaceChildren(el('p', { text: 'אישור מחייב זיהוי. יש להיכנס לחשבון claude.ai של הארגון.' }));
+      return;
+    }
+    if (!state.writable) {
+      gate.hidden = false;
+      gate.replaceChildren(el('p', { text: 'אין לך הרשאת עריכה בדף הזה, ולכן אי אפשר לשמור החלטות. בעל הדף יכול להעניק "Can edit".' }));
+      return;
+    }
+    if (state.reviewer) { gate.hidden = true; return; }
+    gate.hidden = false;
+    const name = el('input', { id: 'rv-name', autocomplete: 'name', required: true });
+    const lic = el('input', { id: 'rv-license', inputmode: 'numeric', required: true });
+    const err = el('p', { class: 'error', role: 'alert' });
+    const save = el('button', { type: 'button', class: 'primary', text: 'שמירת פרטי המאשר' });
+    save.addEventListener('click', async () => {
+      const full_name = name.value.trim(); const license_no = lic.value.trim();
+      if (!full_name || !license_no) { err.textContent = 'נדרשים שם מלא ומספר אישור כשירות.'; return; }
+      save.disabled = true;
+      try {
+        await state.db.doc('reviewers/' + state.me).set({ full_name, license_no, at: new Date().toISOString() });
+        state.reviewer = { full_name, license_no };
+        renderAll();
+      } catch (e) { err.textContent = 'השמירה נכשלה: ' + (e && e.code || 'שגיאה'); save.disabled = false; }
+    });
+    gate.replaceChildren(
+      el('p', { text: 'לפני האישור הראשון: הפרטים האלה ייכתבו בשדה reviewed_by של כל סעיף שתאשר. הם נקשרים לחשבון שלך, ולא לטקסט חופשי.' }),
+      el('div', { class: 'fields' },
+        el('label', { for: 'rv-name' }, 'שם מלא', name),
+        el('label', { for: 'rv-license' }, 'מספר אישור כשירות (משרד העבודה)', lic)),
+      el('div', { class: 'actions' }, save), err);
+  }
+
+  function statusLine(key) {
+    const s = summary(key);
+    const mine = myDecision(key);
+    if (s === 'conflict') return el('p', { class: 'status', 'data-kind': 'conflict', text: '▲ מאשרים שונים החליטו אחרת — דורש יישוב' });
+    if (!mine) return null;
+    const label = LABELS[mine.decision] || ND_LABELS[mine.decision];
+    const mark = mine.decision === 'approve' || mine.decision === 'agree' ? '✓ ' : '▲ ';
+    return el('p', { class: 'status', 'data-kind': mine.decision, text: mark + 'ההחלטה שלך: ' + label });
+  }
+
+  function decisionForm(key, options, extra, onSave) {
+    const mine = myDecision(key);
+    const pend = state.pending.get(key) || {};
+    const canWrite = !!(state.db && state.me && state.reviewer && state.writable);
+    const fs = el('fieldset', { class: 'decide' }, el('legend', { text: 'החלטה' }));
+    const opts = el('div', { class: 'options' });
+    for (const [value, label] of Object.entries(options)) {
+      const id = 'd-' + safeId(key) + '-' + value;
+      const input = el('input', { type: 'radio', name: 'd-' + safeId(key), id, value, checked: (pend.decision || (mine && mine.decision)) === value, disabled: !canWrite });
+      opts.append(input, el('label', { for: id, text: label }));
+    }
+    fs.append(opts);
+    const extraBox = el('div', { class: 'decide' });
+    const err = el('p', { class: 'error', role: 'alert' });
+    const save = el('button', { type: 'button', class: 'primary', text: 'שמירת ההחלטה', disabled: !canWrite });
+    const sync = () => {
+      const v = (fs.querySelector('input:checked') || {}).value;
+      const p = state.pending.get(key) || {};
+      extraBox.replaceChildren(...(v ? extra(v, mine, p.text) : []));
+    };
+    fs.addEventListener('change', () => {
+      const v = (fs.querySelector('input:checked') || {}).value;
+      state.pending.set(key, { decision: v });
+      sync();
+    });
+    extraBox.addEventListener('input', (e) => {
+      const p = state.pending.get(key) || {};
+      state.pending.set(key, { ...p, decision: p.decision || (fs.querySelector('input:checked') || {}).value, text: e.target.value });
+    });
+    sync();
+    save.addEventListener('click', async () => {
+      const v = (fs.querySelector('input:checked') || {}).value;
+      if (!v) { err.textContent = 'לבחור החלטה לפני השמירה.'; return; }
+      const body = onSave(v, extraBox);
+      if (typeof body === 'string') { err.textContent = body; return; }
+      save.disabled = true; err.textContent = '';
+      try {
+        await state.db.doc('decisions/' + key + '~' + state.me).set({
+          ...body, decision: v, by: state.me, at: new Date().toISOString(), batch: batch.batch,
+        });
+        state.pending.delete(key);
+      } catch (e) {
+        err.textContent = e && e.code === 'invalid_argument'
+          ? 'אין לך הרשאה לשמור החלטות בדף הזה.'
+          : 'השמירה נכשלה (' + (e && e.code || 'שגיאה') + '). לנסות שוב.';
+      } finally { save.disabled = false; }
+    });
+    return [fs, extraBox, el('div', { class: 'actions' }, save, statusLine(key)), err];
+  }
+
+  function textArea(id, label, value) {
+    const t = el('textarea', { id }); t.value = value || '';
+    return el('label', { for: id }, label, t);
+  }
+
+  function renderItem(item) {
+    const key = item.id;
+    const card = el('article', { class: 'item', 'data-state': summary(key) || 'open', 'aria-labelledby': 'q-' + key });
+    card.append(...[
+      el('div', { class: 'head' },
+        el('span', { class: 'cite', text: item.citation.section }),
+        el('span', { class: 'id mono', text: item.id })),
+      el('blockquote', { class: 'law' }, item.source_excerpt, el('small', { text: item.citation.law })),
+      el('p', { class: 'question', id: 'q-' + key, text: item.text }),
+      item.drafting_note ? el('p', { class: 'note', text: item.drafting_note }) : null,
+      ...decisionForm(key, LABELS,
+        (v, mine, typed) => {
+          const id = 'x-' + safeId(key);
+          if (v === 'rewrite') return [textArea(id, 'הנוסח שלך לשאלה', typed ?? ((mine && mine.text) || item.text))];
+          if (v === 'split') return [textArea(id, 'איך לפצל (הטיוטות החדשות יחזרו לסקירה)', typed ?? (mine && mine.note))];
+          if (v === 'reject') return [textArea(id, 'נימוק הדחייה (ייכנס לדוח הכיסוי)', typed ?? (mine && mine.note))];
+          return [];
+        },
+        (v, box) => {
+          const t = box.querySelector('textarea');
+          const val = t ? t.value.trim() : '';
+          const base = { seen_text: item.text, seen_excerpt: item.source_excerpt };
+          if (v === 'rewrite') {
+            if (!val.endsWith('?')) return 'הנוסח החדש צריך להיות שאלה (להסתיים ב-?).';
+            if (val === item.text) return 'הנוסח זהה למקור — לבחור "מאשר".';
+            return { ...base, text: val };
+          }
+          if ((v === 'split' || v === 'reject') && val.length < 5) return 'נדרש הסבר קצר.';
+          return v === 'approve' ? base : { ...base, note: val };
+        }),
+    ].filter(Boolean));
+    return card;
+  }
+
+  function renderNotDrafted(nd, n) {
+    const key = 'nd-' + n;
+    const card = el('article', { class: 'item', 'data-state': (summary(key) === 'agree' ? 'approve' : summary(key)) || 'open' });
+    card.append(
+      el('div', { class: 'head' }, el('span', { class: 'cite mono', text: nd.candidate })),
+      el('p', { class: 'note', text: nd.reason }),
+      ...decisionForm(key, ND_LABELS,
+        (v, mine, typed) => v === 'draft' ? [textArea('x-' + key, 'מה לבדוק', typed ?? (mine && mine.note))] : [],
+        (v, box) => {
+          const t = box.querySelector('textarea');
+          const val = t ? t.value.trim() : '';
+          if (v === 'draft' && val.length < 5) return 'לתאר בקצרה מה צריך לבדוק.';
+          return { candidate: nd.candidate, note: val };
+        }),
+    );
+    return card;
+  }
+
+  function renderAll() {
+    renderHeader();
+    renderGate();
+    const show = (key) => state.filter === 'all' || (state.filter === 'open' ? !myDecision(key) : !!myDecision(key));
+    $('#items').replaceChildren(...batch.items.filter((i) => show(i.id)).map(renderItem));
+    $('#not-drafted').replaceChildren(...batch.not_drafted.map((nd, n) => ({ nd, n })).filter(({ n }) => show('nd-' + n)).map(({ nd, n }) => renderNotDrafted(nd, n)));
+    $('#nd-title').hidden = $('#not-drafted').childElementCount === 0;
+  }
+
+  for (const b of document.querySelectorAll('[data-filter]')) {
+    b.addEventListener('click', () => {
+      state.filter = b.dataset.filter;
+      for (const o of document.querySelectorAll('[data-filter]')) o.setAttribute('aria-pressed', String(o === b));
+      renderAll();
+    });
+  }
+
+  renderAll();
+
+  (async () => {
+    const claude = window.claude;
+    if (!claude || !claude.use) return;
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    state.db = db;
+    if (user) {
+      state.me = await user.id();
+      const can = await user.can('data.write');
+      const canEdit = await user.canEdit();
+      state.writable = can === null ? true : canEdit;
+    }
+    if (db && state.me) {
+      const rv = await db.doc('reviewers/' + state.me).get();
+      if (rv.exists) state.reviewer = rv.data();
+      db.collection('decisions').where('batch', '==', batch.batch).onSnapshot((snap) => {
+        state.decisions = new Map(snap.docs.map((d) => [d.id, d.data()]));
+        renderAll();
+      }, () => { state.db = null; renderAll(); });
+    }
+    renderAll();
+  })();
+})();
+</script>
