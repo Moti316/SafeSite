@@ -9,6 +9,7 @@
 | — | [`../CLAUDE.md`](../CLAUDE.md) | איך עובדים בריפו הזה |
 | 00 | `00-INDEX.md` | המסמך הזה |
 | — | [`../TODO.md`](../TODO.md) | מה פתוח עכשיו |
+| 26 | [`26-EXECUTION-PLAN.md`](26-EXECUTION-PLAN.md) | **באיזה סדר עובדים, מה הצעד הבא, ויומן הביצוע** |
 
 ## תכנון ומבנה
 
@@ -25,12 +26,15 @@
 |---|---|---|
 | 04 | [`04-CONTENT-LIBRARY.md`](04-CONTENT-LIBRARY.md) | הספרייה — סכמה והכלל שאוסר להעתיק |
 | 16 | [`16-GLOSSARY.md`](16-GLOSSARY.md) | מה אומר כל מונח מקצועי בעברית |
+| 28 | [`28-LIBRARY-REVIEW.md`](28-LIBRARY-REVIEW.md) | איך מאשרים סעיפי ספרייה |
+| 29 | [`29-COMPETITION.md`](29-COMPETITION.md) | מי המתחרים ואיפה מתמודדים |
 
 ## חזית
 
 | # | קובץ | עונה על |
 |---|---|---|
 | 05 | [`05-DESIGN-SYSTEM.md`](05-DESIGN-SYSTEM.md) | טוקנים, סולמות, רכיבים |
+| 27 | [`27-DESIGN-PLAN.md`](27-DESIGN-PLAN.md) | **תוכנית העיצוב** — תזה, שלושה כיוונים, מבחן שטח ([`design/`](design/RESEARCH.md)) |
 | 06 | [`06-ACCESSIBILITY.md`](06-ACCESSIBILITY.md) | דרישות AA ושערי CI |
 | 10 | [`10-OFFLINE-SYNC.md`](10-OFFLINE-SYNC.md) | איך זה עובד בלי רשת |
 
