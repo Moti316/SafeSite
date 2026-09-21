@@ -18,7 +18,8 @@
     "corpus:hash": "tsx scripts/corpus-hashes.ts --write",
     "library:drafts": "tsx scripts/validate-drafts.ts",
     "library:review": "tsx scripts/build-review-page.ts",
-    "library:apply-review": "tsx scripts/apply-review.ts"
+    "library:apply-review": "tsx scripts/apply-review.ts",
+    "corpus:verify": "tsx scripts/verify-corpus.ts"
   },
   "devDependencies": {
     "@types/node": "22.19.19",

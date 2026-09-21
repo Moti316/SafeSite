@@ -37,7 +37,7 @@
 - [ ] 🔄 `S1.4` אצוות טיוטה — 1 מתוך 9: פיגומים, 2.2 תקנות 16–33 (57 בדיקות, 2 הצעות דחייה)
 - [ ] 👤 `S1.5` **דף הסקירה פורסם — ממתין לך:** [אצווה 1](https://claude.ai/artifact/X2mr1azuq87vpbAHUL6jWk). חוסם ייצור. `apply-review` מוכן
 - [ ] ⬜ `S1.6` קידום לייצור (`checklist-items`, `categories`, `required-documents`)
-- [ ] ⬜ `S1.7` שערי CI: `reviewed_by` · `scope` תקף · `source_excerpt` נמצא בנוסח
+- [ ] 🔄 `S1.7` CI ב-GitHub: טיפוסים, טסטים, נעילת hash, אימות קורפוס, חילוץ עדכני, טיוטות. חסר: שער הייצור (`reviewed_by`, scope, ציטוט) — אחרי S1.6
 - [ ] ⬜ `S1.8` דוח כיסוי ראשון
 
 ## מחקר שוק · M

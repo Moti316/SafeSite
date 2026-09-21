@@ -1,0 +1,40 @@
+# שערי CI — docs/12-TESTING.md. כל שער חוסם merge, בלי עקיפה.
+# actions נעוצים ב-SHA של commit, לא בתגית (25-AI-SECURITY §6, שרשרת אספקה).
+
+name: CI
+
+on:
+  push:
+    branches: [main, 'feat/**', 'fix/**', 'docs/**', 'chore/**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    name: Types, tests, corpus and library
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+      - name: Enable corepack (pnpm from packageManager)
+        run: corepack enable
+      - run: pnpm install --frozen-lockfile
+
+      - name: Types
+        run: pnpm typecheck
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Corpus hash lock
+        run: pnpm corpus:check
+      - name: Corpus fidelity (L2–L5) — fails on any failed text
+        run: pnpm corpus:verify
+
+      - name: Obligations output is current
+        run: pnpm library:check
+      - name: Draft batches
+        run: pnpm library:drafts
