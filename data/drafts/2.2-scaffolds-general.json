@@ -1,0 +1,1152 @@
+{
+  "_note": "טיוטה — לא בייצור. נוסחה אוטומטית ודורשת אישור ממונה סעיף-סעיף. ראה docs/28-LIBRARY-REVIEW.md.",
+  "batch": "2.2-scaffolds-general",
+  "scope": "2.2",
+  "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+  "source_sha256": "7d4f79ea4982707f37e6c7217172383fa5a4fe425b842184b7e80fb4bd850fde",
+  "drafted_by": "claude-opus-5",
+  "drafted_on": "2026-09-21",
+  "covers": [
+    "16",
+    "17",
+    "17א",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "22א",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33"
+  ],
+  "category": {
+    "id": "scaffold",
+    "label": "פיגומים",
+    "applies_to": [
+      "construction"
+    ]
+  },
+  "items": [
+    {
+      "id": "scaffold-001",
+      "category": "scaffold",
+      "text": "האם סופקו פיגומים בכל מקום שבו אי-אפשר לבצע את העבודה בביטחון מהקרקע או ממבנה קבוע?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 16(א)"
+      },
+      "source_excerpt": "אם אי-אפשר לבצע עבודה בביטחון תוך עמידה על הקרקע או על מבנה קבוע מבצע הבנייה יספק פיגומים יציבים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:16(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-002",
+      "category": "scaffold",
+      "text": "האם הפיגום הוקם בהתאם להוראות יצרן הפיגום?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 16(ב)"
+      },
+      "source_excerpt": "תכנון הפיגום, הקמתו, השימוש בו ופירוקו נעשים בהתאם להוראות לפי תקנות אלה ולהוראות יצרן הפיגום",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:16(ב)"
+      ],
+      "drafting_note": "ניתן לענות בשטח רק כשהוראות היצרן זמינות באתר — ראו scaffold-005.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-003",
+      "category": "scaffold",
+      "text": "האם צורפו לפיגום הוראות היצרן בכתב, בשפה העברית?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 16(ג)"
+      },
+      "source_excerpt": "מבצע הבנייה יצרף לפיגומים שהוא מספק לפי תקנות אלה את הוראות היצרן בכתב בשפה העברית",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:16(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-004",
+      "category": "scaffold",
+      "text": "בפיגום שיוצר מחוץ לישראל — האם צורפו הוראות היצרן גם בשפה האנגלית?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 16(ג)"
+      },
+      "source_excerpt": "ואם הפיגום יוצר מחוץ לישראל – גם בשפה האנגלית",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:16(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-005",
+      "category": "scaffold",
+      "text": "האם הוראות היצרן מוצמדות לפנקס הכללי באתר?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 16(ד)"
+      },
+      "source_excerpt": "מנהל העבודה יצמיד את הוראות היצרן כאמור בתקנות משנה (ב) ו-(ג) לפנקס כללי באתר הבנייה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:16(ד)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-006",
+      "category": "scaffold",
+      "text": "האם פיגום שגובהו עולה על 6 מטרים הותקן או פורק בהשגחתו הישירה של בונה מקצועי לפיגומים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 17(א)"
+      },
+      "source_excerpt": "לא יתקינו ולא יפרקו פיגום שגובהו עולה על 6 מטרים אלא תחת השגחתו והנהלתו הישירה של בונה מקצועי לפיגומים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:17(א)"
+      ],
+      "drafting_note": "בפיגום קיים — נענית בבירור עם מנהל העבודה. בזמן הקמה או פירוק — מתצפית.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-007",
+      "category": "scaffold",
+      "text": "בפיגום מיוחד — האם קיימת תכנית פיגומים שהכין מתכנן הקמת פיגומים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 17א(א)"
+      },
+      "source_excerpt": "מבצע הבנייה יקים ויפרק פיגום מיוחד לפי תכנית שהוכנה בידי מתכנן הקמת פיגומים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:17א(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-008",
+      "category": "scaffold",
+      "text": "בפיגום מיוחד — האם מתכנן הקמת הפיגומים אישר בכתב שהפיגום שהוקם תואם לתכנית, לפני תחילת השימוש?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 17א(ב)"
+      },
+      "source_excerpt": "מבצע הבנייה לא יעשה שימוש בפיגום מיוחד אלא לאחר שמתכנן הקמת פיגומים אישר בכתב את התאמת הפיגום שהוקם לתכנית הפיגומים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:17א(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-009",
+      "category": "scaffold",
+      "text": "האם תכנית הפיגומים ואישור המתכנן מצורפים לפנקס הכללי?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 17א(ג)"
+      },
+      "source_excerpt": "מנהל העבודה יצרף לפנקס הכללי את תכנית הפיגומים ואת אישורו של מתכנן הקמת פיגומים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:17א(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-010",
+      "category": "scaffold",
+      "text": "האם רכיבי הפיגום באיכות טובה וללא פגם?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 18(א)"
+      },
+      "source_excerpt": "יספק מבצע הבניה חומר ורכיבים מתאימים באיכות טובה, ללא פגם ובכמות מספקת",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:18(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-011",
+      "category": "scaffold",
+      "text": "האם העצים בפיגום נקיים מקליפה, מצבע וממסמרים בולטים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 18(ב)"
+      },
+      "source_excerpt": "עצים המשמשים להתקנת פיגום יהיו נקיים מקליפה, מצבע ומסמרים בולטים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:18(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-012",
+      "category": "scaffold",
+      "text": "האם המתכת בפיגום ללא חלודה מתקלפת?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 18(ג)"
+      },
+      "source_excerpt": "מתכת המשמשת לפיגום תהיה ללא חלודה מתקלפת",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:18(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-013",
+      "category": "scaffold",
+      "text": "האם לוחות עץ בפיגום, העלולים להתפקע עקב מצב הסיבים, מוגנים מפני התפקעות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 18(ד)"
+      },
+      "source_excerpt": "לוחות עץ המשמשים להתקנת פיגום והעלולים להתפקע עקב מצב הסיבים יוגנו מפני התפקעות",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:18(ד)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-014",
+      "category": "scaffold",
+      "text": "האם מנהל העבודה בדק את רכיבי הפיגום לפני השימוש בו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 19(א)"
+      },
+      "source_excerpt": "מנהל העבודה יבדוק את הרכיבים המיועדים להתקנת פיגום לפני השימוש בו ויפסול כל רכיב שאינו מתאים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:19(א)"
+      ],
+      "drafting_note": "התקנות אינן מחייבות רישום של בדיקה זו (לעומת תקנה 20(ג)), ולכן היא נענית בבירור עם מנהל העבודה ולא מתיעוד. ייתכן שעדיף לדחות.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-015",
+      "category": "scaffold",
+      "text": "האם רכיבי פיגום שנפסלו הורחקו מאתר הבניה?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 19(ב)"
+      },
+      "source_excerpt": "נפסל רכיב כאמור בתקנת משנה (א), ירחיקוהו מאתר הבניה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:19(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-016",
+      "category": "scaffold",
+      "text": "האם רכיבי הפיגומים מאוחסנים בנפרד מחומרים ורכיבים אחרים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 19(ג)"
+      },
+      "source_excerpt": "רכיב המיועד לפיגומים יוחזק בנפרד מכל חומר או רכיב אחר",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:19(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-017",
+      "category": "scaffold",
+      "text": "האם מנהל העבודה בדק את הפיגום עם התקנתו, לפני תחילת השימוש בו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 20(ב)"
+      },
+      "source_excerpt": "הבדיקה לפי תקנת משנה (א) תיערך עם התקנתו של הפיגום ולפני שהחלו להשתמש בו",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:20(א)",
+        "2.2:20(ב)"
+      ],
+      "drafting_note": "נענית מהרישום בפנקס הכללי (scaffold-023).",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-018",
+      "category": "scaffold",
+      "text": "בפיגום שבנה בונה פיגומים מקצועי — האם הבדיקה הראשונה נערכה יחד עמו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 20(ב)"
+      },
+      "source_excerpt": "יחד עם בונה הפיגומים המקצועי שבנה את הפיגום",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:20(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-019",
+      "category": "scaffold",
+      "text": "האם מנהל העבודה בדק את הפיגום בשבעת הימים האחרונים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 20(ב)(1)"
+      },
+      "source_excerpt": "אחת לשבעה ימים לפחות",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:20(ב)(1)"
+      ],
+      "drafting_note": "נענית מהרישום בפנקס הכללי (scaffold-023).",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-020",
+      "category": "scaffold",
+      "text": "האם הפיגום נבדק אחרי הפסקת העבודה האחרונה שנמשכה שלושה ימים או יותר?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 20(ב)(2)"
+      },
+      "source_excerpt": "אחרי כל הפסקת עבודה של שלושה ימים או יותר",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:20(ב)(2)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-021",
+      "category": "scaffold",
+      "text": "האם הפיגום נבדק אחרי הפסקת עבודה בשל גשם או רוח?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 20(ב)(3)"
+      },
+      "source_excerpt": "אחרי כל הפסקת עבודה של יום אחד או יותר בשל גשם או רוח",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:20(ב)(3)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-022",
+      "category": "scaffold",
+      "text": "האם הפיגום נבדק אחרי השינוי האחרון שנעשה בו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 20(ב)(4)"
+      },
+      "source_excerpt": "אחרי כל שינוי שנעשה בפיגום אשר נודע לו עליו",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:20(ב)(4)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-023",
+      "category": "scaffold",
+      "text": "האם כל בדיקת פיגום רשומה בפנקס הכללי?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 20(ג)"
+      },
+      "source_excerpt": "מנהל העבודה ירשום בפנקס הכללי דין וחשבון על כל בדיקת פיגום",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:20(ג)"
+      ],
+      "drafting_note": "החובה אינה חלה על פיגום שאין אדם עלול ליפול ממנו לעומק העולה על 2 מטרים, ועל פיגום חמורי. החלק \"ויביא את הרישום לידיעת מבצע הבניה\" אינו נצפה בשטח ולא נוסח.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-024",
+      "category": "scaffold",
+      "text": "האם הפיגום מותקן באופן יציב, המונע את התמוטטותו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 21"
+      },
+      "source_excerpt": "כל פיגום יותקן כיאות למטרה שלה הוא מיועד ובאופן המונע התמוטטותו",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:21"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-025",
+      "category": "scaffold",
+      "text": "האם הפיגום מותקן באופן המונע נפילת אדם או חפץ מעליו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 21"
+      },
+      "source_excerpt": "באופן המונע התמוטטותו או נפילת אדם או חפץ מעליו",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:21"
+      ],
+      "drafting_note": "הדרישות המפורטות לגידור נמצאות בתקנות 9–10 (פרק ב') — באצווה 2.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-026",
+      "category": "scaffold",
+      "text": "האם פיגום שנמצא לא מתאים בבדיקת מנהל העבודה אינו בשימוש עד שתוקן?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 22"
+      },
+      "source_excerpt": "לא ישתמשו בפיגום כל עוד לא תוקן כראוי, להנחת דעתו של מנהל העבודה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:22"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-027",
+      "category": "scaffold",
+      "text": "האם שינויים בפיגום, לרבות הסרת חלקים, בוצעו בידי בונה מקצועי לפיגומים או לפי הנחייתו בכתב?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 22א"
+      },
+      "source_excerpt": "לא יבצע אדם שינוי בפיגום, לרבות הסרה של חלק ממנו, אלא אם כן הוא בונה מקצועי לפיגומים או שהוא עושה כן על פי הנחייתו בכתב של בונה פיגומים מקצועי",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:22א"
+      ],
+      "drafting_note": "חובת ההודעה למנהל העבודה על השינוי אינה נצפית בשטח; התוצאה שלה נבדקת ב-scaffold-022.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-028",
+      "category": "scaffold",
+      "text": "האם הפיגום מפורק בהדרגה, מלמעלה למטה?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 23(א)"
+      },
+      "source_excerpt": "פירוק פיגום ייעשה באופן הדרגתי מלמעלה למטה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:23(א)"
+      ],
+      "drafting_note": "רלוונטי רק בזמן פירוק.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-029",
+      "category": "scaffold",
+      "text": "בזמן פירוק — האם הורחקו מהמקום כל מי שאינו עוסק ישירות בפירוק?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 23(ב)"
+      },
+      "source_excerpt": "מהמקום שבו מפרקים פיגום יורחקו כל האנשים זולת אלה העוסקים ישירות בביצוע הפירוק",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:23(ב)"
+      ],
+      "drafting_note": "רלוונטי רק בזמן פירוק.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-030",
+      "category": "scaffold",
+      "text": "בזמן פירוק — האם חלקי הפיגום מורדים בזהירות, בלי לזרוק אותם?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 23(ג)"
+      },
+      "source_excerpt": "חלקי הפיגום יורדו בזהירות ולא יזרקו מכל גובה שהוא",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:23(ג)"
+      ],
+      "drafting_note": "רלוונטי רק בזמן פירוק.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-031",
+      "category": "scaffold",
+      "text": "כשמותקן מיתקן הרמה על הפיגום — האם מתכנן הקמת פיגומים בדק את השפעתו על יציבות הפיגום וקבע הוראות לחיזוק ולשימוש?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 24(1)"
+      },
+      "source_excerpt": "מתכנן הקמת פיגומים בדק את השפעת התקנת מיתקן ההרמה על גבי הפיגום על יציבות הפיגום, וקבע הוראות לחיזוק הפיגום ולשימוש במיתקן ההרמה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:24",
+        "2.2:24(1)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-032",
+      "category": "scaffold",
+      "text": "האם מתכנן הקמת פיגומים אישר שהוראותיו לגבי מיתקן ההרמה בוצעו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 24(1א)"
+      },
+      "source_excerpt": "מתכנן הקמת פיגומים אישר ביצוע הדרישות שבפסקה (1)",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:24(1א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-033",
+      "category": "scaffold",
+      "text": "האם הותקנה מחיצה, או ננקטו אמצעים אחרים, למניעת פגיעה של מיתקן ההרמה או המטען בפיגום או באדם שעליו?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 24(2)"
+      },
+      "source_excerpt": "הותקנה מחיצה או ננקטו אמצעים מתאימים למניעת פגיעה בפיגום או באדם שעל הפיגום",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:24(2)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-034",
+      "category": "scaffold",
+      "text": "האם החומר המוחזק על הפיגום אינו גורם לעומס יתר או לפגיעה בשיווי המשקל?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 25"
+      },
+      "source_excerpt": "לא יוחזק על פיגום חומר עד כדי גרימת עומס יתר, פגיעה בשיווי המשקל",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:25"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-035",
+      "category": "scaffold",
+      "text": "האם כמות החומר על הפיגום אינה עולה על הנדרש לעבודה השוטפת?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 25"
+      },
+      "source_excerpt": "או למעלה מההכרחי לביצוע עבודה שוטפת",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:25"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-036",
+      "category": "scaffold",
+      "text": "האם משטחי רצפת הפיגום מותקנים כך שאינם יכולים לזוז ממקומם?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 26(א)"
+      },
+      "source_excerpt": "המותקנים באופן המונע עיתוקם ממקומם בעת השימוש בפיגום",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:26(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-037",
+      "category": "scaffold",
+      "text": "האם רצפת הפיגום אינה משמשת כסמך לחלק של פיגום אחר?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 26(ב)"
+      },
+      "source_excerpt": "לא תשמש רצפת פיגום כסמך לחלק כלשהו של פיגום אחר",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:26(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-038",
+      "category": "scaffold",
+      "text": "האם רוחב רצפת הפיגום 60 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 27(1)"
+      },
+      "source_excerpt": "60 סנטימטרים – אם הרצפה משמשת מקום עמידה או מקום ישיבה לאנשים ואין מחזיקים עליה חמרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:27",
+        "2.2:27(1)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-039",
+      "category": "scaffold",
+      "text": "כשמחזיקים חמרים על רצפת הפיגום — האם רוחבה 80 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 27(2)"
+      },
+      "source_excerpt": "80 סנטימטרים – אם הרצפה משמשת גם להחזקת חמרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:27(2)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-040",
+      "category": "scaffold",
+      "text": "כשמסתתים או מעבדים אבנים על רצפת הפיגום — האם רוחבה 130 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 27(3)"
+      },
+      "source_excerpt": "130 סנטימטרים – אם על הרצפה מסתתים אבנים או מעבדים אותן בדרך אחרת",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:27(3)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-041",
+      "category": "scaffold",
+      "text": "האם רצפת הפיגום מוארכת מעבר לפינת המבנה, במידת רוחבה לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 28"
+      },
+      "source_excerpt": "רצפת הפיגום תוארך אל מעבר לפינת המבנה במידת רחבה לפחות",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:28"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-042",
+      "category": "scaffold",
+      "text": "האם רוחב כל משטח ברצפת הפיגום 15 סנטימטרים לפחות (או 10 לפחות, כשהמשטחים מחוברים בחיבורי קבע)?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 29(1)"
+      },
+      "source_excerpt": "רחבם יהיה 15 סנטימטרים לפחות, אולם מותר להשתמש במשטחים שרחבם לא פחות מ-10 סנטימטרים אם יהיו מחוברים בינם לבין עצמם בחיבורי קבע",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:29(1)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-043",
+      "category": "scaffold",
+      "text": "במשטחי עץ — האם עוביים 2.5 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 29(2)"
+      },
+      "source_excerpt": "אם הם עשויים מעץ, עוביים יהיה מתאים למרחק שבין סמוכות הרוחב והעומס המרבי, אך לא יפחת מ-2.5 סנטימטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:29(2)"
+      ],
+      "drafting_note": "התקנה דורשת גם התאמה למרחק בין הסמוכות ולעומס — זה חישוב, לא תצפית. הבדיקה מכסה רק את המינימום.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-044",
+      "category": "scaffold",
+      "text": "במשטחי עץ לבוד — האם עוביים 2.2 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 29(3)"
+      },
+      "source_excerpt": "אם הם מעץ לבוד לא יפחת עביים מ-2.2 סנטימטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:29(3)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-045",
+      "category": "scaffold",
+      "text": "האם משטחי הרצפה אינם בולטים מעבר לסמך ביותר מפי ארבעה מעוביים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 30(א)"
+      },
+      "source_excerpt": "משטח של רצפת פיגום לא יבלוט מעבר לסמך במידה העולה על עובי המשטח כפול ארבע",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:30(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-046",
+      "category": "scaffold",
+      "text": "האם משטחי הרצפה חופפים זה את זה רק במידה ההכרחית?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 30(א)"
+      },
+      "source_excerpt": "ולא יחפה משטח על משטח אלא במידה ההכרחית",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:30(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-047",
+      "category": "scaffold",
+      "text": "במקום שבו משטחים חופפים — האם נעשו סידורים למניעת מעידה ולתנועת מריצות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 30(א)"
+      },
+      "source_excerpt": "ובלבד שנעשו סידורים מתאימים להקלת תנועת מריצות ולמניעת מעידת אדם",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:30(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-048",
+      "category": "scaffold",
+      "text": "האם כל משטח רצפה מונח על שלוש סמוכות לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 30(ב)"
+      },
+      "source_excerpt": "כל משטח יונח על שלוש סמוכות לפחות אלא אם כן נמנע כפף יתר כתוצאה מעומס יתר",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:30(ב)"
+      ],
+      "drafting_note": "חריג בנוסח: אם נמנע כפף יתר כתוצאה מעומס יתר.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-049",
+      "category": "scaffold",
+      "text": "האם המרווח בין משטחי הרצפה אינו עולה על 1.5 ס\"מ?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 30(ג)"
+      },
+      "source_excerpt": "משטחי רצפה יהיו צמודים אחד לשני במרווח שלא יעלה על 1.5 ס\"מ באופן המונע נפילת חפצים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:30(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-050",
+      "category": "scaffold",
+      "text": "האם הרווח בין רצפת הפיגום לקיר אינו עולה על 30 סנטימטרים?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 31(א)"
+      },
+      "source_excerpt": "הרווח בין רצפת פיגום שאינו פיגום תלוי ובין הקיר לא יעלה על 30 סנטימטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:31(א)"
+      ],
+      "drafting_note": "לא חל על פיגום תלוי.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-051",
+      "category": "scaffold",
+      "text": "בעבודה בישיבה — האם הרווח בין רצפת הפיגום לקיר 25 סנטימטרים לפחות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 31(א)"
+      },
+      "source_excerpt": "נעשית העבודה בישיבה, לא יפחת הרווח מ-25 סנטימטרים ולא יעלה על 30 סנטימטרים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:31(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-052",
+      "category": "scaffold",
+      "text": "כשהרווח לקיר עולה על המותר — האם הותקנו אזן יד, אזן תיכון ולוחות רגל גם בצד הפונה לקיר?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 31(ב)"
+      },
+      "source_excerpt": "יותקנו אזן יד, אזן תיכון ולוחות רגל כמפורט בתקנה 10 גם בצד הפיגום הפונה לקיר המבנה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:31(ב)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-053",
+      "category": "scaffold",
+      "text": "האם אין באתר פיגום סולמות בשימוש?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 32"
+      },
+      "source_excerpt": "לא ישתמש אדם בפיגום סולמות לכל מטרה שהיא",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:32"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-054",
+      "category": "scaffold",
+      "text": "בפיגום בעל יותר מדיוטה אחת — האם הותקנו סולמות גישה לדיוטה התחתונה ובין כל שתי דיוטות?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 33(א)"
+      },
+      "source_excerpt": "בפיגום בו קיימת יותר מדיוטה אחת יותקנו סולמות גישה מהקרקע או מאמצעי סמך בטוח אחר לדיוטה התחתונה ובין כל דיוטה ודיוטה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:33(א)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-055",
+      "category": "scaffold",
+      "text": "האם סולמות הגישה מחוברים כהלכה אל הפיגום?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 33(ב)"
+      },
+      "source_excerpt": "סולמות כאמור בתקנת משנה (א) יחוברו כהלכה אל הפיגום ויקוימו עד לפירוקן של הרצפות",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:33(ב)"
+      ],
+      "drafting_note": "התקנה דורשת גם שהסולמות יישארו עד לפירוק הרצפות.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-056",
+      "category": "scaffold",
+      "text": "האם הפתחים ברצפות הפיגום, שדרכם עוברים הסולמות, חופפים זה לזה?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 33(ג)"
+      },
+      "source_excerpt": "הפתחים ברצפת הפיגום דרכם עוברים הסולמות יהיו חופפים",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:33(ג)"
+      ],
+      "drafting_note": "המילה \"חופפים\" לקוחה מהנוסח. יש לוודא עם הממונה את הפרשנות המקובלת בשטח.",
+      "reviewed_by": null,
+      "reviewed_on": null
+    },
+    {
+      "id": "scaffold-057",
+      "category": "scaffold",
+      "text": "האם בצד הפנימי של פתחי הסולמות הותקן זקף מדיוטה לדיוטה לאחיזת יד?",
+      "scope": "2.2",
+      "citation": {
+        "law": "תקנות הבטיחות בעבודה (עבודות בניה), תשמ\"ח-1988",
+        "section": "תקנה 33(ג)"
+      },
+      "source_excerpt": "ובצידם הפנימי יותקן זקף מדיוטה לדיוטה לאחיזת יד בטוחה",
+      "applies_to": [
+        "construction"
+      ],
+      "derived_from": [
+        "2.2:33(ג)"
+      ],
+      "reviewed_by": null,
+      "reviewed_on": null
+    }
+  ],
+  "not_drafted": [
+    {
+      "candidate": "2.2:17(ב)",
+      "reason": "חובה המוטלת על בונה הפיגומים עצמו. התוצאה הנבדקת בשטח מכוסה ב-scaffold-002 (הוראות היצרן) וב-scaffold-007/008 (תכנית פיגומים). הצעה: לא לנסח בדיקה נפרדת."
+    },
+    {
+      "candidate": "2.2:29(4)",
+      "reason": "שוויון חוזק של משטח מחומר אחר לא ניתן לקבוע בתצפית, ונדרש לשם כך מסמך יצרן. הצעה: לכסות דרך scaffold-002 (הוראות יצרן), או לדחות."
+    }
+  ]
+}
